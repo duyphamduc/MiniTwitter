@@ -74,7 +74,7 @@ public class membershipServlet extends HttpServlet {
             String password = request.getParameter("password");
             String confirm_passoword = request.getParameter("confirm_password");
             String DOB = request.getParameter("DOB");
-            String question = request.getParameter("securityQuestion");
+            String questionNo = request.getParameter("securityQuestion");
             String answer = request.getParameter("answer");
         }
     }
