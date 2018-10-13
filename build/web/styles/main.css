@@ -106,4 +106,17 @@ h2{
     margin-left: 10%;
 }
 
+.errorMessage{
+    color: #d8000c;
+    background-color: #ffbaba;
+    text-align: left;
+}
 
+.formFieldError {
+    backgro
+    background-color: #ffbaba; 
+}
+
+.notVisible {
+    display: none
+}

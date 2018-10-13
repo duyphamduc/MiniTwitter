@@ -16,30 +16,30 @@
                 <a href="/MyTwitter"><img src="/MyTwitter/img/ostrich.svg" class="logo"></a>
                 <h1>Sign Up</h1>
                 <div class="formBox">
-                    <form action="membership" method="post" onsubmit="">
+                    <form action="" method="post" onsubmit="return validateForm();">
                         <div class="errorMessage">
                             <ul id="errorMessage"></ul>
                         </div>
                         <input type="hidden" name="action" value="signup">
 
                         <h2>Account</h2>
-                        <input type="text" id="fullname" placeholder="Full Name" required>
-                        <input type="text" id="username" placeholder="User Name" required><br>
-                        <input type="email" id="email" placeholder="Email" required><br>
-                        <input type="password" id="password" placeholder="Password" required>
-                        <input type="password" id="confirm_password" placeholder="Confirm Password" required>
+                        <input type="text" class="" id="fullname" placeholder="Full Name" required>
+                        <input type="text" class="" id="username" placeholder="User Name" required><br>
+                        <input type="email" class="" id="email" placeholder="Email" required><br>
+                        <input type="password" class="" id="password" placeholder="Password" required>
+                        <input type="password" class="" id="confirm_password" placeholder="Confirm Password" required>
 
                         <h2>Date of Birth</h2>
-                        <input type="date" id="DOB" required>
+                        <input type="date" class="" id="DOB" required>
 
                         <h2>Security Question</h2>
-                        <select id="securityQuestion" onchange="secureFunction();">
+                        <select id="securityQuestion" onchange="securityQuestionValidation();">
                             <option value="0" selected>Choose one of the options below</option>
                             <option value="1" >What was your first pet?</option>
                             <option value="2">What was your first car?</option>
                             <option value="3">What was your first school?</option>
                         </select>
-                        <input type="text" id="answer" class ="notVisible" placeholder="Answer" required><br>
+                        <input type="text" id="answer" class="notVisible" placeholder="Answer" required><br>
 
                         <input type="submit" value="Submit" class="subminbtn"><br>
                     </form>
