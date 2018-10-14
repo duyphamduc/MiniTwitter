@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/header.jsp" %>
+<%@ include file="/footer.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,8 +27,8 @@
                 <div class="formBox">
                     <form action="membership" method="post" onsubmit="">
                         <input type="hidden" name="action" value="login">
-                        <input type="text" id="username" placeholder="Email or Username" required><br>
-                        <input type="password" id="password" placeholder="Password" required><br>
+                        <input type="text" name="emailAddress" placeholder="Email or Username" required><br>
+                        <input type="password" name="password" placeholder="Password" required><br>
                         <a href="/MyTwitter/forgotpassword.jsp">Forgot password</a>
                         <input type="checkbox" name="remember" value="rememberMe">Remember me<br>
                         <input type="submit" value="Login"><br>
