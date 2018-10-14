@@ -18,3 +18,4 @@ Step 11: need to appear message "login fail" when fail to login. Change it in me
 The login could take either username or email to login.
 
 INCLUSION: check all the requirements let see if they are all met. If not, let me know
+# MiniTwitter
