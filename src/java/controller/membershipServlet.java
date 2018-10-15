@@ -5,7 +5,6 @@
  */
 package controller;
 
-import dataaccess.UserIO;
 import business.User;
 import dataaccess.UserDB;
 import java.io.IOException;
@@ -156,7 +155,7 @@ public class membershipServlet extends HttpServlet {
     protected void userLogout(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         deleteCookies(request, response);
-        session.setAttribute("user", null);
+        session.removeAttribute("user");
     }
     
     /*
@@ -240,11 +239,9 @@ public class membershipServlet extends HttpServlet {
             if (loginID == null || loginID.equals("")) {
                 return false;
             } 
-            // if cookie exists, create User object and go to Downloads page
+            // if cookie exists, create User object
             else {
-                ServletContext sc = getServletContext();
-                String path = sc.getRealPath("/WEB-INF/MiniTwitterLogin.txt");
-                user = UserIO.getUser(loginID, path);
+                user = UserDB.searchUsername(loginID);
                 session.setAttribute("user", user);
                 return true;
             }
@@ -257,12 +254,7 @@ public class membershipServlet extends HttpServlet {
 
     private void setCookie(HttpServletRequest request, HttpServletResponse response, User user) {
 
-        // write the User object to a file
-        ServletContext sc = getServletContext();
-        String path = sc.getRealPath("/WEB-INF/MiniTwitterLogin.txt");
-        UserIO.add(user, path);
-
-        // add a cookie that stores the user's email to browser
+        // add a cookie that stores the user's loginID to browser
         Cookie loginIDCookie = new Cookie("miniTwitterLoginID", user.getUsername());
         loginIDCookie.setMaxAge(60 * 60 * 24 * 30); // set age to 1 month
         loginIDCookie.setPath("/");                 // allow entire app to access it

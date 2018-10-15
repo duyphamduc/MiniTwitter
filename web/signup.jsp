@@ -23,7 +23,7 @@
                         <div class="errorMessage">
                             <ul id="errorMessage"></ul>
                         </div>
-                        <span class="errorMessage">${errorMessage}</span>
+                        <span class="errorMessage">${errorMessage}</span><br>
                         <input type="hidden" name="action" value="signup">
 
                         <h2>Account</h2>

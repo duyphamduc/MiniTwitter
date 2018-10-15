@@ -22,7 +22,7 @@
                 <div class="formBox">
                     <form action="membership" method="post" onsubmit="">
                         <input type="hidden" name="action" value="login">
-                        <span class="errorMessage">${errorMessage}</span>
+                        <span class="errorMessage">${errorMessage}</span><br>
                         <input type="text" id="loginID" name="loginID" placeholder="Email or username" required><br>
                         <input type="password" id="password" name="password" placeholder="Password" required><br>
                         <a href="/MyTwitter/forgotpassword.jsp">Forgot password</a>
