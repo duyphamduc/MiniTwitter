@@ -13,7 +13,7 @@ body, html{
 
 .container .left{
     float: left;
-    width: 75%;
+    width: 60%;
     height: 100%;
     background: url('../img/bg.svg');
     background-size: cover;
@@ -24,16 +24,16 @@ body, html{
 .container .left .companyName{
     text-align: center;
     font-family: 'Bowlby One SC', cursive;
-    font-size: 5vw;
+    font-size: 4vw;
     position: relative;
-    top: 40%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .container .right{
     float: right;
-    width: 25%;
+    width: 40%;
     height: 100%;
     text-align: center;
 }
@@ -110,10 +110,6 @@ h2{
     color: #d8000c;
     background-color: #ffbaba;
     text-align: left;
-}
-
-.formFieldError {
-    background-color: #ffbaba; 
 }
 
 .notVisible {

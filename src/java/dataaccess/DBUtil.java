@@ -1,35 +1,39 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package dataaccess;
 
 import java.sql.*;
 
 public class DBUtil {
-
-    public static void closeStatement(Statement s) {
+    public static void closeStatemen(Statement s){
         try {
-            if (s != null) {
+            if(s != null){
                 s.close();
             }
-        } catch (SQLException e) {
+        } catch (SQLException e){
             System.out.println(e);
         }
     }
-
-    public static void closePreparedStatement(Statement ps) {
+    
+    public static void closePreparedStatement(Statement ps){
         try {
-            if (ps != null) {
+            if(ps != null){
                 ps.close();
             }
-        } catch (SQLException e) {
+        } catch (SQLException e){
             System.out.println(e);
         }
     }
-
-    public static void closeResultSet(ResultSet rs) {
+    
+    public static void closeResultSet(ResultSet rs){
         try {
-            if (rs != null) {
+            if(rs != null){
                 rs.close();
             }
-        } catch (SQLException e) {
+        } catch (SQLException e){
             System.out.println(e);
         }
     }

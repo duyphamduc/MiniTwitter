@@ -5,10 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/header.jsp" %>
-<%@ include file="/footer.jsp" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,17 +12,17 @@
         <title>Mini Twitter</title>
         <link rel="stylesheet" href="/styles/main.css">
     </head>
-    <a href="/MyTwitter"><button type="button">Log Out</button></a>
+    <header>
+        <%@ include file="parts/header.jsp" %>  
+    </header>
     <body>
-        <h1>HOME PAGE</h1>
-     
-       
-        <p> <%= request.getParameter("username") %></p>
-        <p> <%= request.getParameter("email") %></p>
-        <p> <%= request.getParameter("password") %></p>
+        <c:if test="${user == null}">
+            <c:redirect url="/login.jsp"></c:redirect>
+        </c:if>
+        <h1>Hello, ${user.fullname}</h1>
+        <a href="/MyTwitter/membership?action=logout">
+            <button type="button">Logout</button>
+        </a>
         
-
     </body>
 </html>
-
-

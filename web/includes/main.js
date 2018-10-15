@@ -11,16 +11,20 @@ function validateForm(){
         
         //Password must contains [a-z][A-Z][0-9]
         if(!passwordContain.test(password.value)){
-            password.className = "formFieldError";
+            password.style.backgroundColor = "#ffbaba";
             errorMsg.push("Password must contains at least one capital letter, one lowercase letter, and one number");
-            
-       
+        }
+        else{
+            password.style.backgroundColor = "white";
         }
         
         //Confirm password must match 
         if (password.value !== confirmPassword.value){
-            confirmPassword.className = "formFieldError";
+            confirmPassword.style.backgroundColor = "#ffbaba";
             errorMsg.push("Confirm password does not match");
+        }
+        else{
+            confirmPassword.style.backgroundColor = "white";
         }
        
     };
@@ -31,7 +35,7 @@ function validateForm(){
         var str = fullname.value;
         var str = str.trim();
         if (str.indexOf(' ') === -1) {
-            fullname.style.backgroundColor = "yellow";
+            fullname.style.backgroundColor = "#ffbaba";
             errorMsg.push("Fullname should contains at least two words.");
         }
         else{
@@ -41,14 +45,14 @@ function validateForm(){
     
     // Check all inputs if it has single quote and 1=1
     var sqlInjectionCheck = function(){
-        var tagName = ['fullname', "username", "email", "password", "confirm_password", "DOB", "answer"];
+        var tagName = ['fullname', "username", "email", "password", "confirm_password", "birthdate", "answer"];
         var field;
         for(var i = 0; i < tagName.length; i++){
             field = document.getElementById(tagName[i]);
             var str = field.value;
             if ((str.indexOf('\'') !== -1) || (str.indexOf("1=1") !== -1)) {
                 errorMsg.push(tagName[i] + " contains invalid characters. Please Try again");
-                field.style.backgroundColor = "yellow";
+                field.style.backgroundColor = "#ffbaba";
             }
             else{
                 field.style.backgroundColor = "white";
@@ -56,9 +60,10 @@ function validateForm(){
         }
     };
     
+    sqlInjectionCheck();
     checkFullname();
     checkPassword();
-    sqlInjectionCheck();
+    
     
     if(errorMsg.length !== 0){
         for(var i = 0;i <= errorMsg.length - 1; i++){
