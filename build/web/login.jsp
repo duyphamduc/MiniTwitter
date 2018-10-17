@@ -18,7 +18,7 @@
             </div>
             <div class="right">
                 <a href="/MyTwitter"><img src="/MyTwitter/img/ostrich.svg" class="logo"></a>
-                <h1>Login</h1>
+
                 <div class="formBox">
                     <form action="membership" method="post" onsubmit="">
                         <input type="hidden" name="action" value="login">
@@ -26,7 +26,8 @@
                         <input type="text" id="loginID" name="loginID" placeholder="Email or username" required><br>
                         <input type="password" id="password" name="password" placeholder="Password" required><br>
                         <a href="/MyTwitter/forgotpassword.jsp">Forgot password</a>
-                        <input type="checkbox" name="remember" value="rememberMe">Remember me<br>
+                        <input type="checkbox" name="remember" value="1">Remember me<br>
+                        <br>
                         <input type="submit" value="Login"><br>
                     </form>
                 </div>

@@ -122,13 +122,14 @@ public class membershipServlet extends HttpServlet {
         String password = request.getParameter("password");
         String[] remember = request.getParameterValues("remember");
         HttpSession session = request.getSession();
-        
         if(loginID.indexOf('@') != -1){ //login ID is an email address
             User user = UserDB.searchEmail(loginID);
             if(user != null){ //user exist
                 if(password.equals(user.getPassword())){
                     session.setAttribute("user", user);
-                    setCookie(request, response, user);
+                    if(remember != null){
+                        setCookie(request, response, user);
+                    } 
                     return 0; //login success
                 }else{
                     return 101; // wrong password
@@ -141,7 +142,9 @@ public class membershipServlet extends HttpServlet {
             if(user != null){ //user exist
                 if(password.equals(user.getPassword())){
                     session.setAttribute("user", user);
-                    setCookie(request, response, user);
+                    if(remember != null){
+                        setCookie(request, response, user);
+                    }
                     return 0; //login success
                 }else{
                     return 101; // wrong password
@@ -211,7 +214,6 @@ public class membershipServlet extends HttpServlet {
                 if(isInserted == 0){
                     return 205; // SQL query error
                 }else{
-                    setCookie(request, response, user);
                     return 0; // signup success
                 }
             }

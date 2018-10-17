@@ -17,7 +17,6 @@
             </div>
             <div class="right">
                 <a href="/MyTwitter"><img src="/MyTwitter/img/ostrich.svg" class="logo"></a>
-                <h1>Sign Up</h1>
                 <div class="formBox">
                     <form action="membership" method="post" onsubmit="return validateForm();">
                         <div class="errorMessage">
@@ -47,7 +46,7 @@
 
                         <input type="submit" value="Submit" class="subminbtn"><br>
                     </form>
-                    <a href="/MyTwitter"><button type="button">Back</button></a>
+                    <a href="/MyTwitter"><button type="button" class="cancelbtn">Cancel</button></a>
                 </div>
             </div>
         </div>
