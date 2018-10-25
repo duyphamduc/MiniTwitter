@@ -1,33 +1,22 @@
 # MiniTwitter
 
-#Need to be designed
-#DO NOT CHANGE THE VARIABLES NAME
+ASSIGNMENT 4
 
+Step 0: Design home page layout. Progress: DONE
 
-Step 1: done
+Step 1: Update header.jsp. Progress: need to be done
 
-Step 2: done
+Step 2: Update Home.jsp. Progress: need to be done
 
-Step 3: done
+Step 3: Update signup.jsp Progress: need to be done
 
-Step 4: done
+Step 4: Forgot password. Progress: need to be done
 
-Step 5: (partially done, because it related to page layout, need to think more about it)
+Step 5: Posting a Tweet. Progress: need to be done
 
-Step 6: done
+Step 6: Mentioning. Progress: need to be done
 
-Step 7: done
+Step 7: Deleting a Tweet. Progress: need to be done
 
-Step 8: done
+Step 8: [OPTIONAL] Profile picture: need to be done
 
-Step 9: done
-
-Step 10: done
-
-Step 11: done
-
-The login could take either username or email to login: DONE
-
-INCLUSION: check all the requirements let see if they are all met. If not, let me know
-
-# MiniTwitter
