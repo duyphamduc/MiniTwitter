@@ -186,15 +186,6 @@ public class membershipServlet extends HttpServlet {
         String questionNo = request.getParameter("securityQuestion");
         String answer = request.getParameter("answer");
         
-        System.out.println(fullname);
-        System.out.println(username);
-        System.out.println(email);
-        System.out.println(birthdate);
-        System.out.println(password);
-        System.out.println(confirm_password);
-        System.out.println(questionNo);
-        System.out.println(answer);
-        
         User user= new User(fullname, username, email, password, birthdate, questionNo, answer);
         session.setAttribute("user", user);
         

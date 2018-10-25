@@ -1,0 +1,30 @@
+body{
+    width: 80%;
+    margin: 0 auto;
+}
+
+hr{
+    margin: 0 auto;
+}
+
+.column{
+    margin: 10px auto;
+}
+
+.box{
+    border-radius: 0px;
+}
+
+.media-content{
+    overflow-x: hidden;
+}
+
+.followbox{
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow:ellipsis;
+}
+
+.trendsitem{
+    margin: .5em auto;
+}
