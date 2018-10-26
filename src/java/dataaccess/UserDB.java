@@ -26,12 +26,13 @@ public class UserDB {
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try{
+            String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
             ps = connection.prepareStatement(query);
             ps.setString(1, user.getFullname());
             ps.setString(2, user.getUsername());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getBirthdate());
-            ps.setString(5, user.getPassword());
+            ps.setString(5, password);
             ps.setString(6, user.getQuestionNo());
             ps.setString(7, user.getAnswer());
             return ps.executeUpdate();

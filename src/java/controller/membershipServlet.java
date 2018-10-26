@@ -6,6 +6,7 @@
 package controller;
 
 import business.User;
+import dataaccess.BCrypt;
 import dataaccess.UserDB;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,6 +57,7 @@ public class membershipServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
+        HttpSession session = request.getSession();
         String action = request.getParameter("action");
         String url = "/login.jsp";
         String errorMessage = "";
@@ -77,6 +79,9 @@ public class membershipServlet extends HttpServlet {
             switch(errorCode){
                 case 0:
                     url = "/home.jsp";
+                    User user = (User) session.getAttribute("user_reg");
+                    session.setAttribute("user", user);
+                    session.removeAttribute("user_reg");
                     errorMessage = "";
                     break;
                 case 201:
@@ -95,9 +100,7 @@ public class membershipServlet extends HttpServlet {
                     errorMessage = "Error " + errorCode + ": Request cannot be complete. Please try again later.";
                     break;
                 default:
-                    url = "/signup.jsp";
                     errorMessage = "";
-                    break;
             }
         }
         request.setAttribute("errorMessage", errorMessage);
@@ -125,13 +128,14 @@ public class membershipServlet extends HttpServlet {
         if(loginID.indexOf('@') != -1){ //login ID is an email address
             User user = UserDB.searchEmail(loginID);
             if(user != null){ //user exist
-                if(password.equals(user.getPassword())){
+                if (BCrypt.checkpw(password, user.getPassword())){
                     session.setAttribute("user", user);
                     if(remember != null){
                         setCookie(request, response, user);
                     } 
                     return 0; //login success
-                }else{
+                }
+                else{
                     return 101; // wrong password
                 }
             }else{ //user not found
@@ -140,13 +144,14 @@ public class membershipServlet extends HttpServlet {
         }else{ // login ID is an username
             User user = UserDB.searchUsername(loginID);
             if(user != null){ //user exist
-                if(password.equals(user.getPassword())){
+                if (BCrypt.checkpw(password, user.getPassword())){
                     session.setAttribute("user", user);
                     if(remember != null){
                         setCookie(request, response, user);
-                    }
+                    } 
                     return 0; //login success
-                }else{
+                }
+                else{
                     return 101; // wrong password
                 }
             }else{ //user not found
@@ -187,7 +192,7 @@ public class membershipServlet extends HttpServlet {
         String answer = request.getParameter("answer");
         
         User user= new User(fullname, username, email, password, birthdate, questionNo, answer);
-        session.setAttribute("user", user);
+        session.setAttribute("user_reg", user);
         
         if(fullname == null || username == null || email == null || birthdate == null || password == null || confirm_password == null || answer == null
                 || fullname.isEmpty() || username.isEmpty() || email.isEmpty() || birthdate.isEmpty() || password.isEmpty() || confirm_password.isEmpty() || answer.isEmpty()){
@@ -197,11 +202,10 @@ public class membershipServlet extends HttpServlet {
         }else{
             if(UserDB.searchUsername(username) != null){
                 return 203; //username already exist
-            }else if(UserDB.searchUsername(email) != null){
+            }else if(UserDB.searchEmail(email) != null){
                 return 204; // email already exist
             }else{
                 int isInserted = UserDB.insert(user);
-                System.out.println("SQL: " + isInserted);
                 if(isInserted == 0){
                     return 205; // SQL query error
                 }else{
