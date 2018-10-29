@@ -61,6 +61,7 @@ public class membershipServlet extends HttpServlet {
         String action = request.getParameter("action");
         String url = "/login.jsp";
         String errorMessage = "";
+        String notification = "";
         
         if(action.equals("login"))
         {
@@ -107,45 +108,37 @@ public class membershipServlet extends HttpServlet {
             url = "/profile.jsp";
             boolean isSuccess = userInfoUpdate(request, response);
             if(isSuccess){
-                String notification = "Update Successful";
-                request.setAttribute("notification", notification);
+                notification = "Update Successful";
             }
             else{
-                String notification = "Update Fail";
-                request.setAttribute("notification", notification);
+                notification = "Update Fail";
             }
         }
         else if(action.equals("changePassword")){
             url = "/profile.jsp";
             int errorCode = userChangePassword(request, response);
-            String notification = "";
             switch(errorCode){
                 case 0:
                     notification = "You have changed password successfully";
-                    request.setAttribute("notification", notification);
                     break;
                 case 601:
                     notification = "Old password mismatch";
-                    request.setAttribute("notification", notification);
                     break;
                 case 602:
                     notification = "Confirm password mismatch";
-                    request.setAttribute("notification", notification);
                     break;
                 case 603:
                     notification = "Request cannot be complete. Please try again later.";
-                    request.setAttribute("notification", notification);
                     break;
                 case 604:
                     notification = "Fields empty. Please fill all the fields";
-                    request.setAttribute("notification", notification);
                     break;
                 default:
                     notification = "";
                     
             }
         }
-        request.setAttribute("errorMessage", errorMessage);
+        request.setAttribute("notification", notification);
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
     
@@ -261,6 +254,7 @@ public class membershipServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
+        request.setAttribute("formActive", "updateProfile");
         String fullname = request.getParameter("fullname");
         String birthdate = request.getParameter("birthdate");
         String questionNo = request.getParameter("securityQuestion");
@@ -293,6 +287,7 @@ public class membershipServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
+        request.setAttribute("formActive", "changePassword");
         String old_password = request.getParameter("old_password");
         String new_password = request.getParameter("new_password");
         String confirm_password = request.getParameter("confirm_password");

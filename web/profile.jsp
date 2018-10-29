@@ -48,21 +48,28 @@
         </div>
                             
         <div class="column is-half">
-            <c:choose>
-                <c:when test="${notification == null}">
-                    <div class="notification is-success is-hidden">
-                        <button class="delete"></button>
-                        ${notification}
-                    </div>
-                </c:when>
-                <c:otherwise>
-                    <div class="notification is-success">
-                        <button class="delete"></button>
-                        ${notification}
-                    </div>
-                </c:otherwise>
-            </c:choose>
-            <form action="membership" method="post" id="updateProfile">
+            <div class="notification is-info" 
+                <c:choose>
+                    <c:when test="${notification == null}">
+                        class="is-hidden"
+                    </c:when>
+                    <c:otherwise>
+                        class=""
+                    </c:otherwise>
+                </c:choose>>
+                <button class="delete"></button>
+                ${notification}
+            </div>
+            
+            <form action="membership" method="post" id="updateProfile"
+                  <c:choose>
+                        <c:when test="${formActive == 'changePassword'}">
+                            class="is-hidden"
+                        </c:when>
+                        <c:otherwise>
+                            class=""
+                        </c:otherwise>
+                    </c:choose>>
                 <h4 class="title is-4">Update Profile</h4>
                 <input type="hidden" name="action" value="updateProfile">
                 <div class="box">
@@ -122,7 +129,15 @@
                 </div>
             </form>
                     
-            <form action="membership" method="post" id="changePassword" class="is-hidden">
+                <form action="membership" method="post" id="changePassword"
+                    <c:choose>
+                        <c:when test="${formActive == 'changePassword'}">
+                            class=""
+                        </c:when>
+                        <c:otherwise>
+                            class="is-hidden"
+                        </c:otherwise>
+                    </c:choose>">
                 <h4 class="title is-4">Change Password</h4>
                 <input type="hidden" name="action" value="changePassword">
                 <div class="box">
