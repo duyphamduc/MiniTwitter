@@ -28,3 +28,12 @@ hr{
 .trendsitem{
     margin: .5em auto;
 }
+
+.has-bg-img{
+    background: url('/MyTwitter/img/hero_bg.jpg')center center; 
+    background-size:cover;
+}
+
+.is-hidden {
+  display: none;
+}

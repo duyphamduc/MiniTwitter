@@ -8,14 +8,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
         <link rel="stylesheet" type="text/css" href="/MyTwitter/styles/home.css">
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script type="text/javascript" src="/MyTwitter/styles/style.js"></script>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item is-active is-tab"><i class="fas fa-home"></i>&nbsp;Home</a>
-                    <a class="navbar-item"><i class="fas fa-bell"></i></i>&nbsp;Notification</a>
-                    <a class="navbar-item"><i class="fas fa-user"></i>&nbsp;Profile</a>
+                    <a href="/MyTwitter/home.jsp" class="navbar-item is-active is-tab"><i class="fas fa-home"></i>&nbsp;Home</a>
+                    <a href="/MyTwitter/#" class="navbar-item"><i class="fas fa-bell"></i></i>&nbsp;Notification</a>
+                    <a href="/MyTwitter/profile.jsp" class="navbar-item"><i class="fas fa-user"></i>&nbsp;Profile</a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">

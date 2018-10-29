@@ -17,14 +17,13 @@ USE `twitterdb` ;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `twitterdb`.`user` ;
 
-CREATE DATABASE `twitterdb`;
 CREATE TABLE `user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(45) NOT NULL,
   `username` varchar(45) NOT NULL,
   `emailAddress` varchar(45) NOT NULL,
   `birthdate` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `questionNo` int(11) NOT NULL,
   `answer` varchar(45) NOT NULL,
   `profilePicture` varchar(200) DEFAULT NULL,

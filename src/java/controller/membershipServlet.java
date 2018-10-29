@@ -103,6 +103,48 @@ public class membershipServlet extends HttpServlet {
                     errorMessage = "";
             }
         }
+        else if(action.equals("updateProfile")){
+            url = "/profile.jsp";
+            boolean isSuccess = userInfoUpdate(request, response);
+            if(isSuccess){
+                String notification = "Update Successful";
+                request.setAttribute("notification", notification);
+            }
+            else{
+                String notification = "Update Fail";
+                request.setAttribute("notification", notification);
+            }
+        }
+        else if(action.equals("changePassword")){
+            url = "/profile.jsp";
+            int errorCode = userChangePassword(request, response);
+            String notification = "";
+            switch(errorCode){
+                case 0:
+                    notification = "You have changed password successfully";
+                    request.setAttribute("notification", notification);
+                    break;
+                case 601:
+                    notification = "Old password mismatch";
+                    request.setAttribute("notification", notification);
+                    break;
+                case 602:
+                    notification = "Confirm password mismatch";
+                    request.setAttribute("notification", notification);
+                    break;
+                case 603:
+                    notification = "Request cannot be complete. Please try again later.";
+                    request.setAttribute("notification", notification);
+                    break;
+                case 604:
+                    notification = "Fields empty. Please fill all the fields";
+                    request.setAttribute("notification", notification);
+                    break;
+                default:
+                    notification = "";
+                    
+            }
+        }
         request.setAttribute("errorMessage", errorMessage);
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
@@ -215,8 +257,73 @@ public class membershipServlet extends HttpServlet {
         }
     }
     
+    protected boolean userInfoUpdate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        String fullname = request.getParameter("fullname");
+        String birthdate = request.getParameter("birthdate");
+        String questionNo = request.getParameter("securityQuestion");
+        String answer = request.getParameter("answer");
+        
+        User user = (User) session.getAttribute("user");
+
+        if(!fullname.equals("")){
+            user.setFullname(fullname);
+        }
+        if(!birthdate.equals("")){
+            user.setBirthdate(birthdate);
+        }
+        if(!questionNo.equals("")){
+            user.setQuestionNo(questionNo);
+        }
+        if(!answer.equals("")){
+            user.setAnswer(answer);
+        }
+        
+        int isUpdated = UserDB.updateInfo(user);
+        if(isUpdated == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    protected int userChangePassword(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        String old_password = request.getParameter("old_password");
+        String new_password = request.getParameter("new_password");
+        String confirm_password = request.getParameter("confirm_password");
+        User user = (User) session.getAttribute("user");
+
+        if(old_password.equals("") || new_password.equals("") || confirm_password.equals("")){
+            return 604;
+        }
+        else{
+            if (BCrypt.checkpw(old_password, user.getPassword())){
+                if(new_password.equals(confirm_password)){
+                    user.setPassword(new_password);
+                    int isUpdated = UserDB.changePassword(user);
+                    if(isUpdated == 1){
+                        return 0;
+                    }else{
+                        return 603; // query error
+                    }
+                }
+                else{
+                    return 602; //confirm password mismatch
+                }
+            }
+            else{
+                return 601; //old password mismatch
+            }
+        }
+    }
+    
      /*
-    method userSignup:
+    method checkUser
     param: HttpServletRequest request, HttpServletResponse response
     return: boolean
         - true: user exist in this session

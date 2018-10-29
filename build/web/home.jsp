@@ -13,10 +13,8 @@
         <div class="column">
             <div class="box is-paddingless">
                 <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-3by1">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                        </figure>
+                    <div class="card-image has-bg-img">
+                        <figure class="image is-3by1"></figure>
                     </div>
                     <div class="card-content">
                         <div class="media">

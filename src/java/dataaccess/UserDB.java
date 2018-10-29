@@ -44,6 +44,61 @@ public class UserDB {
             pool.freeConnection(connection);
         }
     }
+    
+    public static int updateInfo(User user) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query
+                = "UPDATE user "
+                + "SET fullname = ?, birthdate = ?,  questionNo = ?, answer = ?"
+                + "WHERE username = ?;";
+        
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, user.getFullname());
+            ps.setString(2, user.getBirthdate());
+            ps.setString(3, user.getQuestionNo());
+            ps.setString(4, user.getAnswer());
+            ps.setString(5, user.getUsername());
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static int changePassword(User user) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query
+                = "UPDATE user "
+                + "SET password = ?"
+                + "WHERE username = ?;";
+        
+        try{
+            String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+            ps = connection.prepareStatement(query);
+            ps.setString(1, password);
+            ps.setString(2, user.getUsername());
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
     public static User searchEmail(String emailAddress) 
     {
         ConnectionPool pool = ConnectionPool.getInstance();
