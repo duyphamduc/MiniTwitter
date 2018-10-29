@@ -10,6 +10,9 @@ import dataaccess.BCrypt;
 import dataaccess.UserDB;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -138,6 +141,30 @@ public class membershipServlet extends HttpServlet {
                     
             }
         }
+        else if(action.equals("forgotPassword")){
+            url = "/forgotpassword.jsp";
+            try {
+                int errorCode = userForgotPassword(request, response);
+                System.out.println("error:" + errorCode);
+                switch(errorCode){
+                    case 0:
+                        errorMessage = "Your new password has been sent.";
+                        break;
+                    case 111:
+                        errorMessage = "Email not found";
+                        break;
+                    case 112:
+                        errorMessage = "Question and answer are mismatch";
+                        break;
+                    default:
+                        errorMessage = "";
+                }
+            } catch (MessagingException ex) {
+                Logger.getLogger(membershipServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        request.setAttribute("errorMessage", errorMessage);
         request.setAttribute("notification", notification);
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
@@ -193,6 +220,33 @@ public class membershipServlet extends HttpServlet {
                 return 103; // username not found
             }
         }     
+    }
+    
+    protected int userForgotPassword(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, MessagingException {
+        String email = request.getParameter("email");
+        String questionNo = request.getParameter("securityQuestion");
+        String answer = request.getParameter("answer");
+        User user = UserDB.searchEmail(email);
+        if(user != null){ //user exist
+            if(questionNo.equals(user.getQuestionNo()) && answer.equals(user.getAnswer())){
+                String password = GeneratePasswordUtil.generate(6);
+                System.out.println("PASSWORD:" + password);
+                user.setPassword(password);
+                UserDB.changePassword(user);
+                String to = email;
+                String from = "minitwitter.sentmail@gmail.com";
+                String subject = "Mini Twitter - Forgot password";
+                String body = "Your new password is " + password;
+                MailUtilGmail.sendMail(to, from, subject, body);
+                return 0;
+            }
+            else{
+                return 112; //question and answer mismatch
+            }
+        }else{ //user not found
+            return 111; // email not found
+        }
     }
     
     protected void userLogout(HttpServletRequest request, HttpServletResponse response){

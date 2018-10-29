@@ -10,7 +10,7 @@ Step 2: Update Home.jsp. Progress: DONE
 
 Step 3: Update signup.jsp Progress: DONE
 
-Step 4: Forgot password. Progress: ..WORKING.. (Duy)
+Step 4: Forgot password. Progress: DONE
 
 Step 5: Posting a Tweet. Progress: need to be done
 
