@@ -8,9 +8,9 @@ Step 1: Update header.jsp. Progress: DONE
 
 Step 2: Update Home.jsp. Progress: DONE
 
-Step 3: Update signup.jsp Progress: ..WORKING.. (Duy)
+Step 3: Update signup.jsp Progress: DONE
 
-Step 4: Forgot password. Progress: need to be done
+Step 4: Forgot password. Progress: ..WORKING.. (Duy)
 
 Step 5: Posting a Tweet. Progress: need to be done
 
