@@ -6,7 +6,7 @@ Step 0: Design home page layout. Progress: DONE
 
 Step 1: Update header.jsp. Progress: DONE
 
-Step 2: Update Home.jsp. Progress: need to be done
+Step 2: Update Home.jsp. Progress: DONE
 
 Step 3: Update signup.jsp Progress: ..WORKING.. (Duy)
 
