@@ -74,7 +74,7 @@ public class membershipServlet extends HttpServlet {
                 errorMessage = "Username/Email or password does not match with our record. Please try again.";
             }else{
                 errorMessage = "";
-                url = "/tweet";
+                url = "tweet";
             }
         }
         else if(action.equals("signup")){
@@ -164,9 +164,10 @@ public class membershipServlet extends HttpServlet {
             }
             
         }
-        request.setAttribute("errorMessage", errorMessage);
-        request.setAttribute("notification", notification);
-        getServletContext().getRequestDispatcher(url).forward(request, response);
+        session.setAttribute("errorMessage", errorMessage);
+        session.setAttribute("notification", notification);
+        //getServletContext().getRequestDispatcher(url).forward(request, response);
+        response.sendRedirect(url);
     }
     
     

@@ -62,7 +62,15 @@ public class TweetServlet extends HttpServlet {
         String action = request.getParameter("action");
         String url = "/home.jsp";
         
-        if(action.equals("postTweet")){
+        if(action == null){
+            action = "viewTweet";
+        }
+        
+        if(action.equals("viewTweet")){
+            viewTweet(request, response);
+        }
+        
+        else if(action.equals("postTweet")){
             postTweet(request, response);
             viewTweet(request, response);
         }

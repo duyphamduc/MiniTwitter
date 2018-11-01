@@ -50,7 +50,7 @@
         <div class="column is-half">
             <div class="notification is-info" 
                 <c:choose>
-                    <c:when test="${notification == null}">
+                    <c:when test="${(notification == null)}">
                         class="is-hidden"
                     </c:when>
                     <c:otherwise>
