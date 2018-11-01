@@ -116,6 +116,7 @@ public class UserDB {
             
             if(rs.next()){
                 user = new User();
+                user.setUserID(rs.getString("userID"));
                 user.setFullname(rs.getString("fullname"));
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("emailAddress"));
@@ -152,6 +153,7 @@ public class UserDB {
             
             if(rs.next()){
                 user = new User();
+                user.setUserID(rs.getString("userID"));
                 user.setFullname(rs.getString("fullname"));
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("emailAddress"));

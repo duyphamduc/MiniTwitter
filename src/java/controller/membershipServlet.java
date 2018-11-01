@@ -40,7 +40,7 @@ public class membershipServlet extends HttpServlet {
         String url = "/login.jsp";
         if (action.equals("checkuser")) {
             if(checkUser(request, response)){
-                url = "/home.jsp";
+                url = "/tweet";
             }else{
                 url = "/login.jsp";
             }
@@ -74,7 +74,7 @@ public class membershipServlet extends HttpServlet {
                 errorMessage = "Username/Email or password does not match with our record. Please try again.";
             }else{
                 errorMessage = "";
-                url = "/home.jsp";
+                url = "/tweet";
             }
         }
         else if(action.equals("signup")){
@@ -82,7 +82,7 @@ public class membershipServlet extends HttpServlet {
             int errorCode = userSignup(request, response);
             switch(errorCode){
                 case 0:
-                    url = "/home.jsp";
+                    url = "/tweet";
                     User user = (User) session.getAttribute("user_reg");
                     session.setAttribute("user", user);
                     session.removeAttribute("user_reg");

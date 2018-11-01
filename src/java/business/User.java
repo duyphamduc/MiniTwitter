@@ -11,6 +11,7 @@ import java.io.Serializable;
  * @javabean for User Entity
  */
 public class User implements Serializable {
+    private String userID;
     private String fullname;
     private String email;
     private String username;
@@ -21,6 +22,7 @@ public class User implements Serializable {
     
     public User()
     {
+        userID = "";
         fullname = "";
         email = "";
         username = "";
@@ -29,15 +31,16 @@ public class User implements Serializable {
         questionNo = "";
         answer = "";
     }
-    public User(String fromString){
-        String[] data = fromString.replace("[", "").split(",");
-        this.setFullname(data[0]);
-        this.setUsername(data[1]);
-        this.setEmail(data[2]);
-        this.setPassword(data[3]);
-        this.setBirthdate(data[4]);
-        this.setQuestionNo(data[5]);
-        this.setAnswer(data[6]);
+    
+    public User(String userID, String fullname, String username, String email, String password, String birthdate, String questionNo, String answer){
+        this.userID = userID;
+        this.fullname = fullname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.birthdate = birthdate;
+        this.questionNo = questionNo;
+        this.answer = answer;
     }
     
     public User(String fullname, String username, String email, String password, String birthdate, String questionNo, String answer){
@@ -107,6 +110,14 @@ public class User implements Serializable {
     }
     public void setAnswer(String answer){
         this.answer = answer;
+    }
+    
+    public void setUserID(String userID){
+        this.userID = userID;
+    }
+    
+    public String getUserID(){
+        return this.userID;
     }
     
 }
