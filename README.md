@@ -12,7 +12,7 @@ Step 3: Update signup.jsp Progress: DONE
 
 Step 4: Forgot password. Progress: DONE
 
-Step 5: Posting a Tweet. Progress: need to be done
+Step 5: Posting a Tweet. Progress: DONE
 
 Step 6: Mentioning. Progress: need to be done
 
