@@ -9,6 +9,7 @@ package controller;
 import business.User;
 import business.Tweet;
 import dataaccess.TweetDB;
+import dataaccess.UserDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,15 +33,26 @@ public class TweetServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         String url = "/home.jsp";
+        String errorMessage = "";
         
         if(action == null){
-            action = "viewTweet";
+            action = "viewTweets";
         }
         
-        if(action.equals("viewTweet")){
-            viewTweet(request, response);
+        if(action.equals("viewTweets")){
+            viewTweets(request, response);
+            viewUsers(request,response);
+            countUserTweets(request, response);
+        }
+        else if(action.equals("deleteTweet")){
+            if(deleteTweet(request, response) != 1){
+                errorMessage = "Cannot delete this tweet";
+            }
+            viewTweets(request, response);
+            countUserTweets(request, response);
         }
         
+        request.setAttribute("errorMessage", errorMessage);
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
@@ -63,36 +75,58 @@ public class TweetServlet extends HttpServlet {
         String url = "/home.jsp";
         
         if(action == null){
-            action = "viewTweet";
+            action = "viewTweets";
         }
         
-        if(action.equals("viewTweet")){
-            viewTweet(request, response);
+        if(action.equals("viewTweets")){
+            viewTweets(request, response);
+            viewUsers(request,response);
+            countUserTweets(request, response);
         }
         
         else if(action.equals("postTweet")){
             postTweet(request, response);
-            viewTweet(request, response);
+            viewTweets(request, response);
+            countUserTweets(request, response);
         }
-        else if(action.equals("deleteTweet")){
-            deleteTweet(request, response);
-        }
+        
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
 
     }
     
-    protected void viewTweet(HttpServletRequest request, HttpServletResponse response)
+    protected void viewTweets(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         
-        List tweets = TweetDB.viewTweet(user.getUserID());
+        List tweets = TweetDB.viewTweets(user.getUserID());
         if(tweets != null){
             request.setAttribute("tweets", tweets);
         }
+    }
+    
+    protected void viewUsers(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        
+        List users = UserDB.viewUsers();
+        if(users != null){
+            session.setAttribute("users", users);
+        }
+    }
+    
+    protected void countUserTweets(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int count = TweetDB.countUserTweets(user.getUserID());
+        session.setAttribute("tweetCount", count);
+        
     }
     
     protected void postTweet(HttpServletRequest request, HttpServletResponse response)
@@ -110,9 +144,14 @@ public class TweetServlet extends HttpServlet {
         TweetDB.insert(twit);
     
     }
-    protected void deleteTweet(HttpServletRequest request, HttpServletResponse response)
+    protected int deleteTweet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     
+        HttpSession session = request.getSession();
+        String tweetID = request.getParameter("tweetID");
+        
+        User user = (User) session.getAttribute("user");
+        return(TweetDB.delete(tweetID, user.getUserID()));
     }
 
     /**

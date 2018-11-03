@@ -45,7 +45,97 @@ public class TweetDB {
         }
     }
     
-    public static List viewTweet(String userID) throws IOException 
+    public static int delete(String tweetID, String userID) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        //Find and verify tweet belong to a user
+        String query = "SELECT * FROM tweet WHERE tweetID = ? and userID = ?;";
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, tweetID);
+            ps.setString(2, userID);
+            rs = ps.executeQuery();
+            
+            //Tweet found -> delete tweet
+            if(rs.next()){
+                deleteTweet(tweetID, userID);
+                deleteMention(tweetID);
+            }
+            return 1;
+        }catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    private static int deleteTweet(String tweetID, String userID) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        //Delete tweet
+        String query = query = "DELETE FROM tweet WHERE tweetID = ? and userID = ?;";
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, tweetID);
+            ps.setString(2, userID);
+            return ps.executeUpdate();
+        }catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    private static int deleteMention(String tweetID) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        //Find list of mention associate with the tweet
+        String query = "SELECT * FROM mention WHERE tweetID = ?";
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, tweetID);
+            rs = ps.executeQuery();
+            
+            //Mention found -> delete this list of mention
+            if(rs.next()){
+                query = "DELETE FROM mention WHERE tweetID = ?";
+                        
+                try{
+                    ps = connection.prepareStatement(query);
+                    ps.setString(1, tweetID);
+                    System.out.println(ps);
+                    return ps.executeUpdate();
+                }catch (SQLException e) {
+                    System.out.println(e);
+                    return 0;
+                }
+            }
+            return 1;
+        }catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static List viewTweets(String userID) throws IOException 
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -82,6 +172,37 @@ public class TweetDB {
         } catch (SQLException e) {
             System.out.println(e);
             return null;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    
+    
+    public static int countUserTweets(String userID) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int count = 0;
+        
+        String query
+                = "SELECT COUNT(*) AS count FROM tweet WHERE userID = ?";
+        List tweets = new LinkedList();
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, userID);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                count = Integer.parseInt(rs.getString("count"));
+            }
+            return count;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 0;
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);

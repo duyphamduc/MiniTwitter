@@ -31,10 +31,10 @@
                         </div>
                         <div class="content is-small">
                             <a><strong>Tweets</strong></a><br>
-                            <strong>12.3k</strong> 
+                            <strong>${tweetCount}</strong> 
                         </div>
                     </div>
-                  </div>
+                </div>
             </div>
             <div class="box">
                 <h5 class="title is-5">Trends for you</h5>
@@ -94,6 +94,7 @@
                                 <p>
                                     <strong>${tweet.fullname}</strong> <small>@${tweet.username}</small>
                                     <br>
+                                    <c:out value='${tweet.tweetID}'/><br/>
                                     <c:out value='${tweet.twit}'/>
                                 </p>
                             </div>
@@ -114,6 +115,13 @@
                                           <i class="fas fa-heart" aria-hidden="true"></i>
                                         </span>
                                     </a>
+                                    <c:if test="${user.userID == tweet.tweetUserID}">
+                                        <a class="level-item" aria-label="delete" href="tweet?action=deleteTweet&tweetID=${tweet.tweetID}">
+                                            <span class="icon is-small">
+                                              <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </c:if>
                                 </div>
                             </nav>
                         </div>
@@ -126,54 +134,24 @@
         <div class="column followbox">
             <div class="box">
                 <h5 class="title is-5">Who to follow</h5>
-                <article class="media">
-                    <div class="media-left" >
-                        <figure class="image is-48x48">
-                            <img src="https://bulma.io/images/placeholders/64x64.png">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <div class="content">
-                            <strong>John Smith</strong><small>@johnsmithjohnsmith</small><br>
-                            <a class="button is-info is-small is-outlined">Follow</a>
+                <c:forEach var="user" items="${users}">
+                    <article class="media">
+                        <div class="media-left" >
+                            <figure class="image is-48x48">
+                                <img src="https://bulma.io/images/placeholders/64x64.png">
+                            </figure>
                         </div>
-                    </div>
-                    <div class="media-right">
-                      <button class="delete"></button>
-                    </div>
-                </article>
-                <article class="media">
-                    <div class="media-left" >
-                        <figure class="image is-48x48">
-                            <img src="https://bulma.io/images/placeholders/64x64.png">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <div class="content">
-                            <strong>John Smith</strong><small>@johnsmithjohnsmith</small><br>
-                            <a class="button is-info is-small is-outlined">Follow</a>
+                        <div class="media-content">
+                            <div class="content">
+                                <strong>${user.fullname}</strong><small> @${user.username}</small><br>
+                                <a class="button is-info is-small is-outlined">Follow</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="media-right">
-                      <button class="delete"></button>
-                    </div>
-                </article>
-                <article class="media">
-                    <div class="media-left" >
-                        <figure class="image is-48x48">
-                            <img src="https://bulma.io/images/placeholders/64x64.png">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <div class="content">
-                            <strong>John Smith</strong><small>@johnsmithjohnsmith</small><br>
-                            <a class="button is-info is-small is-outlined">Follow</a>
+                        <div class="media-right">
+                          <button class="delete"></button>
                         </div>
-                    </div>
-                    <div class="media-right">
-                      <button class="delete"></button>
-                    </div>
-                </article>
+                    </article>
+                </c:forEach>
             </div>
         </div>
     </div>

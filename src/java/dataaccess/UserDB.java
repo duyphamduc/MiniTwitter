@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class UserDB {
@@ -40,6 +41,44 @@ public class UserDB {
             System.out.println(e);
             return 0;
         } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static List viewUsers() throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String query = "SELECT * FROM user;";
+        
+        List users = new LinkedList();
+        try{
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            User user = null;
+            while(rs.next()){
+                user = new User();
+                user.setUserID(rs.getString("userID"));
+                user.setFullname(rs.getString("fullname"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("emailAddress"));
+                user.setBirthdate(rs.getString("birthdate"));
+                user.setPassword(rs.getString("password"));
+                user.setQuestionNo(rs.getString("questionNo"));
+                user.setAnswer(rs.getString("answer"));
+                
+                users.add(user);
+            }
+            return users;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            DBUtil.closeResultSet(rs);
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
