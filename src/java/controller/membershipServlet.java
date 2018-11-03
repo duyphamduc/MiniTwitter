@@ -164,10 +164,14 @@ public class membershipServlet extends HttpServlet {
             }
             
         }
-        session.setAttribute("errorMessage", errorMessage);
-        session.setAttribute("notification", notification);
-        //getServletContext().getRequestDispatcher(url).forward(request, response);
-        response.sendRedirect(url);
+        request.setAttribute("errorMessage", errorMessage);
+        request.setAttribute("notification", notification);
+        if(url.equals("tweet")){
+            response.sendRedirect(url);
+        }else{
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        
     }
     
     
@@ -323,7 +327,7 @@ public class membershipServlet extends HttpServlet {
         if(!birthdate.equals("")){
             user.setBirthdate(birthdate);
         }
-        if(!questionNo.equals("")){
+        if(!questionNo.equals("0")){
             user.setQuestionNo(questionNo);
         }
         if(!answer.equals("")){
