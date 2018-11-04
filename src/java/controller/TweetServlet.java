@@ -142,7 +142,8 @@ public class TweetServlet extends HttpServlet {
         
         Tweet twit = new Tweet(user.getUserID(), tweet, time);
         TweetDB.insert(twit);
-    
+        twit = TweetDB.getLastestTweet(user.getUserID());
+        TweetUtil.linkUserToMention(twit);
     }
     protected int deleteTweet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

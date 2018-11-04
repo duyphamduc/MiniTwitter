@@ -14,7 +14,7 @@ Step 4: Forgot password. Progress: DONE
 
 Step 5: Posting a Tweet. Progress: DONE
 
-Step 6: Mentioning. Progress: need to be done
+Step 6: Mentioning. Progress: DONE
 
 Step 7: Deleting a Tweet. Progress: DONE
 

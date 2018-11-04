@@ -7,6 +7,7 @@ package dataaccess;
 
 import business.Tweet;
 import business.User;
+import controller.TweetUtil;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,20 +26,52 @@ public class TweetDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
+        ResultSet rs = null;
         
         String query
                 = "INSERT INTO tweet (userID, twit, time) "
                 + "VALUES (?, ?, ?)";
         
         try{
+            String twit = tweet.getTwit();
+            twit = TweetUtil.highlightMention(twit);
             ps = connection.prepareStatement(query);
             ps.setString(1, tweet.getTweetUserID());
-            ps.setString(2, tweet.getTwit());
+            ps.setString(2, twit);
             ps.setString(3, tweet.getTime());
             return ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
             return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static Tweet getLastestTweet(String userID)
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String query = "SELECT * FROM tweet WHERE userID = ? ORDER BY time DESC;";
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, userID);
+            rs = ps.executeQuery();
+            Tweet tweet = null;
+            if(rs.next()){
+                tweet = new Tweet();
+                tweet.setTweetID(rs.getString("tweetID"));
+                tweet.setTweetUserID(rs.getString("userID"));
+                tweet.setTwit(rs.getString("twit"));
+            }
+            return tweet;
+        }catch (SQLException e) {
+            System.out.println(e);
+            return null;
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
@@ -99,40 +132,7 @@ public class TweetDB {
     
     private static int deleteMention(String tweetID) throws IOException 
     {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        Connection connection = pool.getConnection();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
-        //Find list of mention associate with the tweet
-        String query = "SELECT * FROM mention WHERE tweetID = ?";
-        try{
-            ps = connection.prepareStatement(query);
-            ps.setString(1, tweetID);
-            rs = ps.executeQuery();
-            
-            //Mention found -> delete this list of mention
-            if(rs.next()){
-                query = "DELETE FROM mention WHERE tweetID = ?";
-                        
-                try{
-                    ps = connection.prepareStatement(query);
-                    ps.setString(1, tweetID);
-                    System.out.println(ps);
-                    return ps.executeUpdate();
-                }catch (SQLException e) {
-                    System.out.println(e);
-                    return 0;
-                }
-            }
-            return 1;
-        }catch (SQLException e) {
-            System.out.println(e);
-            return 0;
-        } finally {
-            DBUtil.closePreparedStatement(ps);
-            pool.freeConnection(connection);
-        }
+        return(MentionDB.delete(tweetID));
     }
     
     public static List viewTweets(String userID) throws IOException 

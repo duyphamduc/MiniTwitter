@@ -37,3 +37,7 @@ hr{
 .is-hidden {
   display: none;
 }
+
+.mention {
+    color:  #209CEE;
+}

@@ -94,8 +94,7 @@
                                 <p>
                                     <strong>${tweet.fullname}</strong> <small>@${tweet.username}</small>
                                     <br>
-                                    <c:out value='${tweet.tweetID}'/><br/>
-                                    <c:out value='${tweet.twit}'/>
+                                    ${tweet.twit}
                                 </p>
                             </div>
                             <nav class="level is-mobile">
