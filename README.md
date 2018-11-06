@@ -18,5 +18,5 @@ Step 6: Mentioning. Progress: DONE
 
 Step 7: Deleting a Tweet. Progress: DONE
 
-Step 8: [OPTIONAL] Profile picture: need to be done
+Step 8: [OPTIONAL] Profile picture: DONE
 

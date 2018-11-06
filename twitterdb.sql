@@ -35,7 +35,7 @@ CREATE TABLE `mention` (
   `tweetID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   PRIMARY KEY (`mentionID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE `tweet` (
   `twit` varchar(280) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`tweetID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,8 @@ CREATE TABLE `user` (
   `password` varchar(64) NOT NULL,
   `questionNo` int(11) NOT NULL,
   `answer` varchar(45) NOT NULL,
-  `profilePicture` varchar(200) DEFAULT NULL,
+  `profileURL` varchar(500) DEFAULT 'https://res.cloudinary.com/minitwitter/image/upload/v1541485112/profile/default_profile.png',
+  `coverURL` varchar(500) DEFAULT 'https://res.cloudinary.com/minitwitter/image/upload/v1541485580/cover/default_cover.jpg',
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -126,4 +127,4 @@ USE `twitterdb`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-01 14:49:07
+-- Dump completed on 2018-11-06 11:50:21
