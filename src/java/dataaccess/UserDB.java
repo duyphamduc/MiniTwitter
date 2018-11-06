@@ -70,6 +70,8 @@ public class UserDB {
                 user.setPassword(rs.getString("password"));
                 user.setQuestionNo(rs.getString("questionNo"));
                 user.setAnswer(rs.getString("answer"));
+                user.setCoverURL(rs.getString("coverURL"));
+                user.setProfileURL(rs.getString("profileURL"));
                 
                 users.add(user);
             }
@@ -138,6 +140,56 @@ public class UserDB {
         }
     }
     
+    public static int uploadProfileImage(String userID, String url) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query
+                = "UPDATE user "
+                + "SET profileURL = ?"
+                + "WHERE userID = ?;";
+        
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, url);
+            ps.setString(2, userID);
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static int uploadCoverImage(String userID, String url) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query
+                = "UPDATE user "
+                + "SET coverURL = ?"
+                + "WHERE userID = ?;";
+        
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, url);
+            ps.setString(2, userID);
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
     public static User searchEmail(String emailAddress) 
     {
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -163,6 +215,8 @@ public class UserDB {
                 user.setPassword(rs.getString("password"));
                 user.setQuestionNo(rs.getString("questionNo"));
                 user.setAnswer(rs.getString("answer"));
+                user.setCoverURL(rs.getString("coverURL"));
+                user.setProfileURL(rs.getString("profileURL"));
             }
             return user;
         } catch (SQLException e) {
@@ -200,6 +254,8 @@ public class UserDB {
                 user.setPassword(rs.getString("password"));
                 user.setQuestionNo(rs.getString("questionNo"));
                 user.setAnswer(rs.getString("answer"));
+                user.setCoverURL(rs.getString("coverURL"));
+                user.setProfileURL(rs.getString("profileURL"));
             }
             return user;
         } catch (SQLException e) {

@@ -12,16 +12,33 @@
     <section class="hero is-medium has-bg-img">
         <div class="hero-body"></div>
     </section>
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Upload Image</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <form method="post" action="uploadFile" enctype="multipart/form-data">
+                <section class="modal-card-body">
+                    <input type="file" name="profile_file" />
+                    <% session.setAttribute("uploadType", "profile"); %>
+                </section>
+                <footer class="modal-card-foot">
+                    <input class="button is-success" type="submit" value="Upload" />
+                </footer>
+            </form>
+        </div>
+    </div>
     <div class="columns is-desktop">
         <div class="column">
             <div class="box is-paddingless">
                 <div class="card">
-                    
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                               <figure class="image is-48x48">
-                                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                                <img src="${user.profileURL}" alt="Placeholder image">
                               </figure>
                             </div>
                             <div class="media-content">
@@ -31,10 +48,10 @@
                         </div>
                         <div class="content is-small">
                             <a><strong>Tweets</strong></a><br>
-                            <strong>12.3k</strong> 
+                            <strong>${tweetCount}</strong> 
                         </div>
                     </div>
-                  </div>
+                </div>
             </div>
             <aside class="menu">
                 <p class="menu-label">
@@ -43,20 +60,20 @@
                 <ul class="menu-list">
                     <li><a onclick="profileUpdate('profile');">Update profile</a></li>
                     <li><a onclick="profileUpdate('password');">Change Password</a></li>
+                    <li><a id="change-cover">
+                            <span>Change profile photo</span>
+                        </a>
+                    </li>
                 </ul>
             </aside>
         </div>
                             
         <div class="column is-half">
-            <div class="notification is-info" 
-                <c:choose>
-                    <c:when test="${(notification == null)}">
-                        class="is-hidden"
-                    </c:when>
-                    <c:otherwise>
-                        class=""
-                    </c:otherwise>
-                </c:choose>>
+            <div class="notification is-info 
+                 <c:if test="${empty notification}">
+                     is-hidden
+                 </c:if>">
+                
                 <button class="delete"></button>
                 ${notification}
             </div>

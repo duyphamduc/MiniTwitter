@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -163,6 +164,9 @@ public class membershipServlet extends HttpServlet {
                 Logger.getLogger(membershipServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+        }
+        else if(action.equals("upload")){
+            String filename = request.getParameter("profile_file");
         }
         request.setAttribute("errorMessage", errorMessage);
         request.setAttribute("notification", notification);

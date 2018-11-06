@@ -15,13 +15,15 @@
             <div class="box is-paddingless">
                 <div class="card">
                     <div class="card-image has-bg-img">
-                        <figure class="image is-3by1"></figure>
+                        <figure class="image is-3by2">
+                            <img src="${user.coverURL}" alt="Placeholder image">
+                        </figure>
                     </div>
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                               <figure class="image is-48x48">
-                                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                                <img src="${user.profileURL}">
                               </figure>
                             </div>
                             <div class="media-content">
@@ -61,7 +63,7 @@
                 <div class="media">
                     <div class="media-left">
                         <figure class="image is-48x48">
-                            <img src="https://bulma.io/images/placeholders/64x64.png" alt="Image">
+                            <img src="${user.profileURL}" alt="Image">
                         </figure>
                     </div>
                     <div class="media-content">
@@ -86,7 +88,7 @@
                     <div class="media">
                         <div class="media-left">
                             <figure class="image is-64x64">
-                                <img src="https://bulma.io/images/placeholders/64x64.png" alt="Image">
+                                <img src="${user.profileURL}" alt="Image">
                             </figure>
                         </div>
                         <div class="media-content">
@@ -137,7 +139,7 @@
                     <article class="media">
                         <div class="media-left" >
                             <figure class="image is-48x48">
-                                <img src="https://bulma.io/images/placeholders/64x64.png">
+                                <img src="${user.profileURL}">
                             </figure>
                         </div>
                         <div class="media-content">

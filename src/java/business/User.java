@@ -19,6 +19,9 @@ public class User implements Serializable {
     private String password;
     private String questionNo;
     private String answer;
+    private String profileURL;
+    private String coverURL;
+    
     
     public User()
     {
@@ -30,6 +33,8 @@ public class User implements Serializable {
         password = "";
         questionNo = "";
         answer = "";
+        profileURL = "";
+        coverURL = "";
     }
     
     public User(String userID, String fullname, String username, String email, String password, String birthdate, String questionNo, String answer){
@@ -119,5 +124,23 @@ public class User implements Serializable {
     public String getUserID(){
         return this.userID;
     }
+    
+    public void setCoverURL(String url){
+        this.coverURL = url;
+    }
+    
+    public void setProfileURL(String url){
+        this.profileURL = url;
+    }
+    
+    public String getCoverURL(){
+        return this.coverURL;
+    }
+    
+    public String getProfileURL(){
+        return this.profileURL;
+    }
+    
+    
     
 }

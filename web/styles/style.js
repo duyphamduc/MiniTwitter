@@ -3,6 +3,16 @@ $(document).on('click', '.notification > button.delete', function() {
     return false;
 });
 
+$(document).on('click', '#change-cover', function() {
+    $(".modal").addClass('is-active');
+    return false;
+});
+
+$(document).on('click', '.modal-card-head > button.delete', function() {
+    $(this).closest(".modal").removeClass('is-active');
+    return false;
+});
+
 function profileUpdate(type){
     $('.notification').addClass('is-hidden');
     if(type === 'profile'){
