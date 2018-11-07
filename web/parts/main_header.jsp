@@ -14,9 +14,9 @@
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-menu">
                 <div class="navbar-start">
-                    <a href="/MyTwitter/tweet" class="navbar-item is-active is-tab"><i class="fas fa-home"></i>&nbsp;Home</a>
-                    <a href="/MyTwitter/#" class="navbar-item"><i class="fas fa-bell"></i></i>&nbsp;Notification</a>
-                    <a href="/MyTwitter/profile.jsp" class="navbar-item"><i class="fas fa-user"></i>&nbsp;Profile</a>
+                    <a href="/MyTwitter/tweet" id="home" class="navbar-item"><i class="fas fa-home"></i>&nbsp;Home</a>
+                    <a href="/MyTwitter/#" id="notification" class="navbar-item"><i class="fas fa-bell"></i></i>&nbsp;Notification</a>
+                    <a href="/MyTwitter/profile.jsp" id="profile" class="navbar-item"><i class="fas fa-user"></i>&nbsp;Profile</a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
