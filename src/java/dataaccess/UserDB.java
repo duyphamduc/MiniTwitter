@@ -256,6 +256,7 @@ public class UserDB {
                 user.setAnswer(rs.getString("answer"));
                 user.setCoverURL(rs.getString("coverURL"));
                 user.setProfileURL(rs.getString("profileURL"));
+                System.out.println(rs.getString("profileURL"));
             }
             return user;
         } catch (SQLException e) {

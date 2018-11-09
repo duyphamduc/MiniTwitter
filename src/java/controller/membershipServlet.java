@@ -84,9 +84,6 @@ public class membershipServlet extends HttpServlet {
             switch(errorCode){
                 case 0:
                     url = "/tweet";
-                    User user = (User) session.getAttribute("user_reg");
-                    session.setAttribute("user", user);
-                    session.removeAttribute("user_reg");
                     errorMessage = "";
                     break;
                 case 201:
@@ -307,6 +304,9 @@ public class membershipServlet extends HttpServlet {
                 if(isInserted == 0){
                     return 205; // SQL query error
                 }else{
+                    user = UserDB.searchUsername(username);
+                    session.setAttribute("user", user);
+                    session.removeAttribute("user_reg");
                     return 0; // signup success
                 }
             }
