@@ -1,22 +1,20 @@
 # MiniTwitter
 
-ASSIGNMENT 4
+Final Stage:
 
-Step 0: Design home page layout. Progress: DONE
+Step 1: Hashtags. Progress: need to be done
 
-Step 1: Update header.jsp. Progress: DONE
+Step 2: Trending Hashtags. Progress: need to be done
 
-Step 2: Update Home.jsp. Progress: DONE
+Step 3: Follow. Progress: need to be done
 
-Step 3: Update signup.jsp Progress: DONE
+Step 4: Enhance Security Progress: DONE
 
-Step 4: Forgot password. Progress: DONE
+Step 5: Update homepage: 
+  - Sees twits from those she follows + those she is mentioned in + those posted by her.
+  - Progress: need to be done
+  
+Step 6: Notification. Progress: need to be done
 
-Step 5: Posting a Tweet. Progress: DONE
-
-Step 6: Mentioning. Progress: DONE
-
-Step 7: Deleting a Tweet. Progress: DONE
-
-Step 8: [OPTIONAL] Profile picture: DONE
+Step 7: [OPTIONAL] Search bar: need to be done
 
