@@ -19,6 +19,7 @@ public class Tweet implements Serializable{
     String time;
     String username;
     String fullname;
+    String profileURL;
     
     public Tweet()
     {
@@ -70,6 +71,9 @@ public class Tweet implements Serializable{
     public void setFullname(String fullname){
         this.fullname = fullname;
     }
+    public void setProfileURL(String profileURL){
+        this.profileURL = profileURL;
+    }
     
     public String getTweetID(){
         return this.tweetID;
@@ -91,6 +95,10 @@ public class Tweet implements Serializable{
     }
     public String getFullname(){
         return this.fullname;
+    }
+    
+    public String getProfileURL(){
+        return this.profileURL;
     }
     
     

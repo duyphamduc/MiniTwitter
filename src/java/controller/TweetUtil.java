@@ -69,8 +69,8 @@ public class TweetUtil {
             if(indexOfSpace == -1){
                 indexOfSpace = twit.length();
             }
-            String mention = twit.substring(indexOf, indexOfSpace);
-            newTwit = newTwit.replace(mention, "<a class='hashtag'>" + mention + "</a>");
+            String hashtag = twit.substring(indexOf, indexOfSpace);
+            newTwit = newTwit.replace(hashtag, "<a href=\"hashtag\" id=\"hashtag\" class=\"hashtag\">" + hashtag + "</a>");
             startInd = indexOf+1;
         }
         return newTwit;

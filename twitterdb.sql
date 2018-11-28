@@ -51,7 +51,7 @@ CREATE TABLE `hashtag` (
   `hashtagText` varchar(100) NOT NULL,
   `hashtagCount` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`hashtagID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `mention` (
   `tweetID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   PRIMARY KEY (`mentionID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `tweet` (
   `twit` varchar(280) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`tweetID`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `tweetHashtag` (
   `tweetID` int(11) NOT NULL,
   `hashtagID` int(11) NOT NULL,
   PRIMARY KEY (`tweetHashtagID`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,6 +123,25 @@ CREATE TABLE `user` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Temporary table structure for view `view_hashtag_tweet`
+--
+
+DROP TABLE IF EXISTS `view_hashtag_tweet`;
+/*!50001 DROP VIEW IF EXISTS `view_hashtag_tweet`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `view_hashtag_tweet` AS SELECT 
+ 1 AS `tweetID`,
+ 1 AS `userID`,
+ 1 AS `twit`,
+ 1 AS `time`,
+ 1 AS `username`,
+ 1 AS `fullname`,
+ 1 AS `profileURL`,
+ 1 AS `hashtagID`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary table structure for view `view_tweet`
 --
 
@@ -137,7 +156,8 @@ SET character_set_client = utf8;
  1 AS `twit`,
  1 AS `time`,
  1 AS `username`,
- 1 AS `fullname`*/;
+ 1 AS `fullname`,
+ 1 AS `profileURL`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -145,6 +165,24 @@ SET character_set_client = @saved_cs_client;
 --
 
 USE `twitterdb`;
+
+--
+-- Final view structure for view `view_hashtag_tweet`
+--
+
+/*!50001 DROP VIEW IF EXISTS `view_hashtag_tweet`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_hashtag_tweet` AS select `tweet`.`tweetID` AS `tweetID`,`tweet`.`userID` AS `userID`,`tweet`.`twit` AS `twit`,`tweet`.`time` AS `time`,`user`.`username` AS `username`,`user`.`fullname` AS `fullname`,`user`.`profileURL` AS `profileURL`,`tweethashtag`.`hashtagID` AS `hashtagID` from ((`tweet` join `user` on((`tweet`.`userID` = `user`.`userID`))) left join `tweethashtag` on((`tweet`.`tweetID` = `tweethashtag`.`tweetID`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `view_tweet`
@@ -159,7 +197,7 @@ USE `twitterdb`;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `view_tweet` AS select `tweet`.`tweetID` AS `tweetID`,`tweet`.`userID` AS `tweetUserID`,`mention`.`userID` AS `tweetMentionID`,`tweet`.`twit` AS `twit`,`tweet`.`time` AS `time`,`user`.`username` AS `username`,`user`.`fullname` AS `fullname` from ((`tweet` join `user` on((`tweet`.`userID` = `user`.`userID`))) left join `mention` on((`tweet`.`tweetID` = `mention`.`tweetID`))) */;
+/*!50001 VIEW `view_tweet` AS select `tweet`.`tweetID` AS `tweetID`,`tweet`.`userID` AS `tweetUserID`,`mention`.`userID` AS `tweetMentionID`,`tweet`.`twit` AS `twit`,`tweet`.`time` AS `time`,`user`.`username` AS `username`,`user`.`fullname` AS `fullname`,`user`.`profileURL` AS `profileURL` from ((`tweet` join `user` on((`tweet`.`userID` = `user`.`userID`))) left join `mention` on((`tweet`.`tweetID` = `mention`.`tweetID`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -173,4 +211,4 @@ USE `twitterdb`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-27 23:28:02
+-- Dump completed on 2018-11-28 16:15:55

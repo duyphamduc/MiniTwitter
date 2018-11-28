@@ -25,6 +25,14 @@ function profileUpdate(type){
     return false;
 };
 
+$(document).ready(function(){
+    $("#hashtag").mouseover(function(){
+        var hashtag = $("#hashtag").text();
+        hashtag = hashtag.substring(1);
+        $("#hashtag").attr("href","hashtag?action=viewTweets&hashtagText=" + hashtag);
+    });
+});
+
 
 $(document).on('click', '.navbar-item', function() {
     $('navbar-item').removeClass('is-active is-tab');

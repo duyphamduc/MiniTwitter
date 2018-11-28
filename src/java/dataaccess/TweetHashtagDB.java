@@ -6,7 +6,9 @@
 package dataaccess;
 
 import business.Hashtag;
+import business.Tweet;
 import business.TweetHashtag;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -88,6 +90,47 @@ public class TweetHashtagDB {
         }catch (SQLException e) {
             System.out.println(e);
             return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static List viewTweets(String hashtagID) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        String query
+                = "SELECT * "
+                + "FROM view_hashtag_tweet "
+                + "WHERE hashtagID = ? "
+                + "ORDER BY time DESC;";
+        
+        List tweets = new LinkedList();
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, hashtagID);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Tweet tweet = new Tweet();
+                tweet.setTweetID(rs.getString("tweetID"));
+                tweet.setTweetUserID(rs.getString("UserID"));
+                tweet.setTwit(rs.getString("twit"));
+                tweet.setTime(rs.getString("time"));
+                tweet.setUsername(rs.getString("username"));
+                tweet.setFullname(rs.getString("fullname"));
+                tweet.setProfileURL(rs.getString("profileURL"));
+                
+                tweets.add(tweet);
+            }
+            return tweets;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
         } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);

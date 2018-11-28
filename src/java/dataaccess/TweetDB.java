@@ -150,7 +150,7 @@ public class TweetDB {
         ResultSet rs = null;
         
         String query
-                = "SELECT tweetID, tweetUserID, MAX(tweetMentionID) as tweetMentionID, twit, time, username, fullname "
+                = "SELECT tweetID, tweetUserID, MAX(tweetMentionID) as tweetMentionID, twit, time, username, fullname, profileURL "
                 + "FROM view_tweet "
                 + "WHERE tweetUserID = ? or tweetMentionID = ?  "
                 + "GROUP BY tweetID "
@@ -172,6 +172,7 @@ public class TweetDB {
                 tweet.setTime(rs.getString("time"));
                 tweet.setUsername(rs.getString("username"));
                 tweet.setFullname(rs.getString("fullname"));
+                tweet.setProfileURL(rs.getString("profileURL"));
                 
                 tweets.add(tweet);
             }

@@ -53,7 +53,7 @@ public class UserDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        String query = "SELECT * FROM user;";
+        String query = "SELECT * FROM user LIMIT 0,3;";
         
         List users = new LinkedList();
         try{

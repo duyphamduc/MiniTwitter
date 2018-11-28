@@ -42,7 +42,7 @@
                 <h5 class="title is-5">Trends for you</h5>
                 <c:forEach var="trend" items="${topTrends}">
                     <div class="trendsitem">
-                        <a><strong>#${trend.hashtagText}</strong></a> <br>
+                        <a href="hashtag?action=viewTweets&hashtagText=${trend.hashtagText}"><strong>#${trend.hashtagText}</strong></a> <br>
                         <small>${trend.hashtagCount} tweets</small>
                     </div>
                 </c:forEach>
@@ -80,7 +80,7 @@
                     <div class="media">
                         <div class="media-left">
                             <figure class="image is-64x64">
-                                <img src="${user.profileURL}" alt="Image">
+                                <img src="${tweet.profileURL}" alt="Image">
                             </figure>
                         </div>
                         <div class="media-content">
@@ -149,3 +149,4 @@
         </div>
     </div>
 </body>
+<%@ include file="parts/main_footer.jsp" %> 
