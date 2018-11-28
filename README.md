@@ -3,10 +3,10 @@
 Final Stage:
 
 Step 1: Hashtags. 
-  - Progress: need to be done
+  - Progress: DONE
 
 Step 2: Trending Hashtags. 
-  - Progress: need to be done
+  - Progress: DONE
 
 Step 3: Follow. 
   - Progress: need to be done
