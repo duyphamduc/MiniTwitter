@@ -24,6 +24,37 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `twitterdb` /*!40100 DEFAULT CHARACTER 
 USE `twitterdb`;
 
 --
+-- Table structure for table `follow`
+--
+
+DROP TABLE IF EXISTS `follow`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `follow` (
+  `followID` int(11) NOT NULL AUTO_INCREMENT,
+  `userID` int(11) NOT NULL,
+  `followedUserID` int(11) NOT NULL,
+  `followDate` datetime NOT NULL,
+  PRIMARY KEY (`followID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `hashtag`
+--
+
+DROP TABLE IF EXISTS `hashtag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hashtag` (
+  `hashtagID` int(11) NOT NULL AUTO_INCREMENT,
+  `hashtagText` varchar(100) NOT NULL,
+  `hashtagCount` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`hashtagID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `mention`
 --
 
@@ -35,7 +66,7 @@ CREATE TABLE `mention` (
   `tweetID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   PRIMARY KEY (`mentionID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +82,22 @@ CREATE TABLE `tweet` (
   `twit` varchar(280) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`tweetID`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tweetHashtag`
+--
+
+DROP TABLE IF EXISTS `tweetHashtag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tweetHashtag` (
+  `tweetHashtagID` int(11) NOT NULL AUTO_INCREMENT,
+  `tweetID` int(11) NOT NULL,
+  `hashtagID` int(11) NOT NULL,
+  PRIMARY KEY (`tweetHashtagID`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +119,7 @@ CREATE TABLE `user` (
   `profileURL` varchar(500) DEFAULT 'https://res.cloudinary.com/minitwitter/image/upload/v1541485112/profile/default_profile.png',
   `coverURL` varchar(500) DEFAULT 'https://res.cloudinary.com/minitwitter/image/upload/v1541485580/cover/default_cover.jpg',
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,4 +173,4 @@ USE `twitterdb`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 11:50:21
+-- Dump completed on 2018-11-27 23:28:02

@@ -199,7 +199,7 @@ public class membershipServlet extends HttpServlet {
                 if (BCrypt.checkpw(password, user.getPassword())){
                     session.setAttribute("user", user);
                     if(remember != null){
-                        setCookie(request, response, user);
+                        setAccountCookie(request, response, user);
                     } 
                     return 0; //login success
                 }
@@ -215,7 +215,7 @@ public class membershipServlet extends HttpServlet {
                 if (BCrypt.checkpw(password, user.getPassword())){
                     session.setAttribute("user", user);
                     if(remember != null){
-                        setCookie(request, response, user);
+                        setAccountCookie(request, response, user);
                     } 
                     return 0; //login success
                 }
@@ -257,7 +257,7 @@ public class membershipServlet extends HttpServlet {
     
     protected void userLogout(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        deleteCookies(request, response);
+        deleteAccountCookies(request, response);
         session.removeAttribute("user");
     }
     
@@ -414,7 +414,7 @@ public class membershipServlet extends HttpServlet {
         }
     }
 
-    private void setCookie(HttpServletRequest request, HttpServletResponse response, User user) {
+    private void setAccountCookie(HttpServletRequest request, HttpServletResponse response, User user) {
 
         // add a cookie that stores the user's loginID to browser
         Cookie loginIDCookie = new Cookie("miniTwitterLoginID", user.getUsername());
@@ -423,7 +423,7 @@ public class membershipServlet extends HttpServlet {
         response.addCookie(loginIDCookie);
    }
     
-    private void deleteCookies(HttpServletRequest request,
+    private void deleteAccountCookies(HttpServletRequest request,
             HttpServletResponse response) {
 
         Cookie[] cookies = request.getCookies();

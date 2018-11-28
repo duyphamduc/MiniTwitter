@@ -40,20 +40,12 @@
             </div>
             <div class="box">
                 <h5 class="title is-5">Trends for you</h5>
-                <div class="trendsitem">
-                    <a><strong>#trendA</strong></a> <br>
-                    <small>1234 tweets</small>
-                </div>
-                <div class="trendsitem">
-                    <a><strong>John Doe</strong></a> <br>
-                    <small>1234 tweets</small>
-                </div>
-                <div class="trendsitem">
-                    <a><strong>#trendB</strong></a> <br>
-                    <small>1234 tweets</small>
-                </div>
-                
-                
+                <c:forEach var="trend" items="${topTrends}">
+                    <div class="trendsitem">
+                        <a><strong>#${trend.hashtagText}</strong></a> <br>
+                        <small>${trend.hashtagCount} tweets</small>
+                    </div>
+                </c:forEach>
             </div>
         </div>
         <!--Center Column-->

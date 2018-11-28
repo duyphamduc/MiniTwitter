@@ -63,7 +63,6 @@ public class MentionDB {
                 try{
                     ps = connection.prepareStatement(query);
                     ps.setString(1, tweetID);
-                    System.out.println(ps);
                     return ps.executeUpdate();
                 }catch (SQLException e) {
                     System.out.println(e);

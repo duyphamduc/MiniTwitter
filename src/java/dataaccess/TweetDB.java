@@ -35,6 +35,7 @@ public class TweetDB {
         try{
             String twit = tweet.getTwit();
             twit = TweetUtil.highlightMention(twit);
+            twit = TweetUtil.highlightHashtag(twit);
             ps = connection.prepareStatement(query);
             ps.setString(1, tweet.getTweetUserID());
             ps.setString(2, twit);
@@ -97,6 +98,7 @@ public class TweetDB {
             if(rs.next()){
                 deleteTweet(tweetID, userID);
                 deleteMention(tweetID);
+                deleteHashTag(tweetID);
             }
             return 1;
         }catch (SQLException e) {
@@ -133,6 +135,11 @@ public class TweetDB {
     private static int deleteMention(String tweetID) throws IOException 
     {
         return(MentionDB.delete(tweetID));
+    }
+    
+    private static int deleteHashTag(String tweetID) throws IOException 
+    {
+        return(TweetHashtagDB.delete(tweetID));
     }
     
     public static List viewTweets(String userID) throws IOException 
@@ -190,7 +197,6 @@ public class TweetDB {
         
         String query
                 = "SELECT COUNT(*) AS count FROM tweet WHERE userID = ?";
-        List tweets = new LinkedList();
         try{
             ps = connection.prepareStatement(query);
             ps.setString(1, userID);

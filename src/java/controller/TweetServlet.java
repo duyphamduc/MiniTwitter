@@ -8,19 +8,17 @@ package controller;
 
 import business.User;
 import business.Tweet;
+import dataaccess.HashtagDB;
 import dataaccess.TweetDB;
 import dataaccess.UserDB;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
 import java.util.List;
 
 public class TweetServlet extends HttpServlet {
@@ -41,7 +39,6 @@ public class TweetServlet extends HttpServlet {
         
         if(action.equals("viewTweets")){
             viewTweets(request, response);
-            viewUsers(request,response);
             countUserTweets(request, response);
         }
         else if(action.equals("deleteTweet")){
@@ -51,6 +48,9 @@ public class TweetServlet extends HttpServlet {
             viewTweets(request, response);
             countUserTweets(request, response);
         }
+        
+        viewUsers(request,response);
+        viewTrends(request, response);
         
         request.setAttribute("errorMessage", errorMessage);
         getServletContext()
@@ -80,7 +80,6 @@ public class TweetServlet extends HttpServlet {
         
         if(action.equals("viewTweets")){
             viewTweets(request, response);
-            viewUsers(request,response);
             countUserTweets(request, response);
         }
         
@@ -89,6 +88,9 @@ public class TweetServlet extends HttpServlet {
             viewTweets(request, response);
             countUserTweets(request, response);
         }
+        
+        viewUsers(request,response);
+        viewTrends(request, response);
         
         getServletContext()
                 .getRequestDispatcher(url)
@@ -119,6 +121,17 @@ public class TweetServlet extends HttpServlet {
         }
     }
     
+    protected void viewTrends(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        
+        List topTrends = HashtagDB.getTopTrends();
+        if(topTrends != null){
+            session.setAttribute("topTrends", topTrends);
+        }
+    }
+    
     protected void countUserTweets(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             
@@ -143,7 +156,8 @@ public class TweetServlet extends HttpServlet {
         Tweet twit = new Tweet(user.getUserID(), tweet, time);
         TweetDB.insert(twit);
         twit = TweetDB.getLastestTweet(user.getUserID());
-        TweetUtil.linkUserToMention(twit);
+        TweetUtil.updateMentionDB(twit);
+        TweetUtil.updateHashtagDB(twit);
     }
     protected int deleteTweet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
