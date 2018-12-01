@@ -40,18 +40,15 @@ public class TweetServlet extends HttpServlet {
         
         if(action.equals("viewTweets")){
             viewTweets(request, response);
-            countUserTweets(request, response);
         }
         else if(action.equals("deleteTweet")){
             if(deleteTweet(request, response) != 1){
                 errorMessage = "Cannot delete this tweet";
             }
             viewTweets(request, response);
-            countUserTweets(request, response);
         }
         
-        viewUsers(request,response);
-        viewTrends(request, response);
+        pageUpdate(request, response);
         
         request.setAttribute("errorMessage", errorMessage);
         getServletContext()
@@ -81,17 +78,14 @@ public class TweetServlet extends HttpServlet {
         
         if(action.equals("viewTweets")){
             viewTweets(request, response);
-            countUserTweets(request, response);
         }
         
         else if(action.equals("postTweet")){
             postTweet(request, response);
             viewTweets(request, response);
-            countUserTweets(request, response);
         }
         
-        viewUsers(request,response);
-        viewTrends(request, response);
+        pageUpdate(request, response);
         
         getServletContext()
                 .getRequestDispatcher(url)
@@ -109,6 +103,17 @@ public class TweetServlet extends HttpServlet {
         if(tweets != null){
             request.setAttribute("tweets", tweets);
         }
+    }
+    
+    protected void pageUpdate(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        
+        viewUsers(request,response);
+        viewTrends(request, response);
+        countUserTweets(request, response);
+        countFollowing(request, response);
+        countFollowers(request, response);
     }
     
     protected void viewUsers(HttpServletRequest request, HttpServletResponse response)
@@ -148,12 +153,33 @@ public class TweetServlet extends HttpServlet {
         session.setAttribute("tweetCount", count);
         
     }
+    protected void countFollowing(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int count = FollowDB.countFolling(user.getUserID());
+        session.setAttribute("followingCount", count);
+        
+    }
+    protected void countFollowers(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int count = FollowDB.countFollowers(user.getUserID());
+        session.setAttribute("followersCount", count);
+        
+    }
     
     protected void postTweet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
         String tweet = request.getParameter("tweet");
+        if(tweet.length() > 280){
+            tweet = tweet.substring(0, 280);
+        }
         User user = (User) session.getAttribute("user");
         
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

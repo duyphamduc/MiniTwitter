@@ -21,6 +21,7 @@ public class User implements Serializable {
     private String answer;
     private String profileURL;
     private String coverURL;
+    private String lastVist;
     
     
     public User()
@@ -140,6 +141,15 @@ public class User implements Serializable {
     public String getProfileURL(){
         return this.profileURL;
     }
+    
+    public void setLastVisit(String lastVisit){
+        this.lastVist = lastVisit;
+    }
+    public String getLastVisit(){
+        return this.lastVist;
+    }
+    
+    
     
     
     

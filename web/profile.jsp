@@ -34,23 +34,7 @@
         <div class="column">
             <div class="box is-paddingless">
                 <div class="card">
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                              <figure class="image is-48x48">
-                                <img src="${user.profileURL}" alt="Placeholder image">
-                              </figure>
-                            </div>
-                            <div class="media-content">
-                              <p class="title is-5">${user.fullname}</p>
-                              <p class="subtitle is-6">@${user.username}</p>
-                            </div>
-                        </div>
-                        <div class="content is-small">
-                            <a><strong>Tweets</strong></a><br>
-                            <strong>${tweetCount}</strong> 
-                        </div>
-                    </div>
+                    <%@ include file="parts/user_profile.jsp" %>  
                 </div>
             </div>
             <aside class="menu">

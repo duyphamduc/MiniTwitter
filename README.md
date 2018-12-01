@@ -19,7 +19,7 @@ Step 5: Update homepage:
   - Progress: DONE
   
 Step 6: Notification.
-  - Progress: need to be done
+  - Progress: DONE
 
 Step 7: [OPTIONAL] Search bar:
   - Progress: need to be done

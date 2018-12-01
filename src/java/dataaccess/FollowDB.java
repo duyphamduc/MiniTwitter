@@ -129,4 +129,60 @@ public class FollowDB {
             pool.freeConnection(connection);
         }
     }
+    
+    public static int countFollowers(String userID) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int count = 0;
+        
+        String query
+                = "SELECT COUNT(*) AS count FROM follow WHERE followedUserID = ?";
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, userID);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                count = Integer.parseInt(rs.getString("count"));
+            }
+            return count;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static int countFolling(String userID) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int count = 0;
+        
+        String query
+                = "SELECT COUNT(*) AS count FROM follow WHERE userID = ?";
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, userID);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                count = Integer.parseInt(rs.getString("count"));
+            }
+            return count;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
 }

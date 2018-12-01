@@ -17,7 +17,7 @@
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <strong>${tweet.fullname}</strong> <small>@${tweet.username}</small>
+                        <strong>${tweet.fullname}</strong> <small>@${tweet.username}</small> &middot; <small class="timeAgo">${tweet.time}</small>
                         <br>
                         ${tweet.twit}
                     </p>

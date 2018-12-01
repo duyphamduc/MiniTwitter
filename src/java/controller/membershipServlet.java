@@ -5,10 +5,15 @@
  */
 package controller;
 
+import business.Notification;
 import business.User;
 import dataaccess.BCrypt;
+import dataaccess.NotificationDB;
 import dataaccess.UserDB;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -190,11 +195,22 @@ public class membershipServlet extends HttpServlet {
         String password = request.getParameter("password");
         String[] remember = request.getParameterValues("remember");
         HttpSession session = request.getSession();
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+	LocalDateTime now = LocalDateTime.now();
+        String time= (String) dtf.format(now);
+        
         if(loginID.indexOf('@') != -1){ //login ID is an email address
             User user = UserDB.searchEmail(loginID);
             if(user != null){ //user exist
                 if (BCrypt.checkpw(password, user.getPassword())){
+                    List<Notification> notifications = NotificationDB.getNotifications(user);
+                    session.setAttribute("notifications", notifications);
+                    
+                    user.setLastVisit(time);
+                    UserDB.setLoginTime(user);
                     session.setAttribute("user", user);
+                    
                     if(remember != null){
                         setAccountCookie(request, response, user);
                     } 
@@ -210,7 +226,13 @@ public class membershipServlet extends HttpServlet {
             User user = UserDB.searchUsername(loginID);
             if(user != null){ //user exist
                 if (BCrypt.checkpw(password, user.getPassword())){
+                    List<Notification> notifications = NotificationDB.getNotifications(user);
+                    session.setAttribute("notifications", notifications);
+                    
+                    user.setLastVisit(time);
+                    UserDB.setLoginTime(user);
                     session.setAttribute("user", user);
+                    
                     if(remember != null){
                         setAccountCookie(request, response, user);
                     } 
@@ -301,7 +323,14 @@ public class membershipServlet extends HttpServlet {
                 if(isInserted == 0){
                     return 205; // SQL query error
                 }else{
+                    
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                    LocalDateTime now = LocalDateTime.now();
+                    String time= (String) dtf.format(now);
+                    
                     user = UserDB.searchUsername(username);
+                    user.setLastVisit(time);
+                    UserDB.setLoginTime(user);
                     session.setAttribute("user", user);
                     session.removeAttribute("user_reg");
                     return 0; // signup success

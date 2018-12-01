@@ -73,6 +73,7 @@ public class UserDB {
                 user.setAnswer(rs.getString("answer"));
                 user.setCoverURL(rs.getString("coverURL"));
                 user.setProfileURL(rs.getString("profileURL"));
+                user.setLastVisit(rs.getString("lastVisit"));
                 
                 users.add(user);
             }
@@ -218,6 +219,7 @@ public class UserDB {
                 user.setAnswer(rs.getString("answer"));
                 user.setCoverURL(rs.getString("coverURL"));
                 user.setProfileURL(rs.getString("profileURL"));
+                user.setLastVisit(rs.getString("lastVisit"));
             }
             return user;
         } catch (SQLException e) {
@@ -257,6 +259,7 @@ public class UserDB {
                 user.setAnswer(rs.getString("answer"));
                 user.setCoverURL(rs.getString("coverURL"));
                 user.setProfileURL(rs.getString("profileURL"));
+                user.setLastVisit(rs.getString("lastVisit"));
             }
             return user;
         } catch (SQLException e) {
@@ -264,6 +267,31 @@ public class UserDB {
             return null;
         } finally {
             DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+    }
+    
+    public static int setLoginTime(User user) throws IOException 
+    {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+        
+        String query
+                = "UPDATE user "
+                + "SET lastVisit = ?"
+                + "WHERE username = ?;";
+        
+        try{
+            ps = connection.prepareStatement(query);
+            ps.setString(1, user.getLastVisit());
+            ps.setString(2, user.getUsername());
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+            return 0;
+        } finally {
             DBUtil.closePreparedStatement(ps);
             pool.freeConnection(connection);
         }
