@@ -195,40 +195,10 @@
         </div>
         <div class="column followbox">
             <div class="box followbox">
-                <h5 class="title is-5">Who to follow</h5>
-                <c:forEach var="user" items="${users}">
-                    <article class="media">
-                        <div class="media-left" >
-                            <figure class="image is-48x48">
-                                <img src="${user.profileURL}">
-                            </figure>
-                        </div>
-                        <div class="media-content">
-                            <div class="content">
-                                <strong>${user.fullname}</strong><small> @${user.username}</small><br>
-                                <a class="button is-info is-small is-outlined">Follow</a>
-                            </div>
-                        </div>
-                        <div class="media-right">
-                          <button class="delete"></button>
-                        </div>
-                    </article>
-                </c:forEach>
+                <%@ include file="parts/follow.jsp" %>
             </div>
             <div class="box">
-                <h5 class="title is-5">Trends for you</h5>
-                <div class="trendsitem">
-                    <a><strong>#trendA</strong></a> <br>
-                    <small>1234 tweets</small>
-                </div>
-                <div class="trendsitem">
-                    <a><strong>John Doe</strong></a> <br>
-                    <small>1234 tweets</small>
-                </div>
-                <div class="trendsitem">
-                    <a><strong>#trendB</strong></a> <br>
-                    <small>1234 tweets</small>
-                </div>
+                <%@ include file="parts/trend.jsp" %>
             </div>
         </div>
     </div>

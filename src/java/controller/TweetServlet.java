@@ -8,6 +8,7 @@ package controller;
 
 import business.User;
 import business.Tweet;
+import dataaccess.FollowDB;
 import dataaccess.HashtagDB;
 import dataaccess.TweetDB;
 import dataaccess.UserDB;
@@ -114,10 +115,16 @@ public class TweetServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         
-        List users = UserDB.viewUsers();
+        List users = UserDB.viewUsers(user.getUsername());
+        List followedList = FollowDB.followedUsers(user.getUserID());
         if(users != null){
             session.setAttribute("users", users);
+        }
+        
+        if(followedList != null){
+            session.setAttribute("followedList", followedList);
         }
     }
     

@@ -150,9 +150,12 @@ public class TweetDB {
         ResultSet rs = null;
         
         String query
-                = "SELECT tweetID, tweetUserID, MAX(tweetMentionID) as tweetMentionID, twit, time, username, fullname, profileURL "
-                + "FROM view_tweet "
-                + "WHERE tweetUserID = ? or tweetMentionID = ?  "
+                = "SELECT tweetID, tweet_userID, "
+                + "MAX(mention_userID) AS mention_userID, "
+                + "MAX(follow_userID) AS follow_userID, "
+                + "twit, time, username, fullname, profileURL "
+                + "FROM view_tweets "
+                + "WHERE tweet_userID = ? OR mention_userID = ? OR follow_userID = ?  "
                 + "GROUP BY tweetID "
                 + "ORDER BY time DESC;";
         
@@ -161,13 +164,14 @@ public class TweetDB {
             ps = connection.prepareStatement(query);
             ps.setString(1, userID);
             ps.setString(2, userID);
+            ps.setString(3, userID);
             rs = ps.executeQuery();
             
             while(rs.next()){
                 Tweet tweet = new Tweet();
                 tweet.setTweetID(rs.getString("tweetID"));
-                tweet.setTweetUserID(rs.getString("tweetUserID"));
-                tweet.setTweetMentionID(rs.getString("tweetMentionID"));
+                tweet.setTweetUserID(rs.getString("tweet_userID"));
+                tweet.setTweetMentionID(rs.getString("mention_userID"));
                 tweet.setTwit(rs.getString("twit"));
                 tweet.setTime(rs.getString("time"));
                 tweet.setUsername(rs.getString("username"));

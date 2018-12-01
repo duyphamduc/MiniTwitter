@@ -1,5 +1,5 @@
 body{
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -44,4 +44,18 @@ hr{
 
 .hashtag {
     color:  #209CEE;
+}
+
+#tweetBox{
+    color: #209CEE;
+    border:1px solid #209CEE;
+    
+}
+
+#tweetBox::placeholder{
+    color: #209CEE;
+}
+
+#tweetBox:focus{
+    color: black;
 }

@@ -46,18 +46,19 @@ public class UserDB {
         }
     }
     
-    public static List viewUsers() throws IOException 
+    public static List viewUsers(String username) throws IOException 
     {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
         
-        String query = "SELECT * FROM user LIMIT 0,3;";
+        String query = "SELECT * FROM user WHERE username NOT IN(?);";
         
         List users = new LinkedList();
         try{
             ps = connection.prepareStatement(query);
+            ps.setString(1, username);
             rs = ps.executeQuery();
             User user = null;
             while(rs.next()){

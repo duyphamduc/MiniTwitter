@@ -25,6 +25,15 @@ function profileUpdate(type){
     return false;
 };
 
+function follow(action, username){
+    if(action === 'follow'){
+        $(".follow").attr("href", "follow?action=follow&username=" + username);
+    }else{
+        $(".follow").attr("href", "follow?action=unfollow&username=" + username);
+    }
+    
+};
+
 $(document).ready(function(){
     $("#hashtag").mouseover(function(){
         var hashtag = $("#hashtag").text();

@@ -3,20 +3,20 @@
 Final Stage:
 
 Step 1: Hashtags. 
-  - Progress: need to be done
+  - Progress: DONE
 
 Step 2: Trending Hashtags. 
-  - Progress: need to be done
+  - Progress: DONE
 
 Step 3: Follow. 
-  - Progress: need to be done
+  - Progress: DONE
 
 Step 4: Enhance Security.
   - Progress: DONE
 
 Step 5: Update homepage: 
   - Sees twits from those she follows + those she is mentioned in + those posted by her.
-  - Progress: need to be done
+  - Progress: DONE
   
 Step 6: Notification.
   - Progress: need to be done

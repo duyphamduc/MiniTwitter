@@ -6,5 +6,38 @@
 package business;
 
 public class Follow {
+    String userID;
+    String followedUserID;
+    String followDate;
     
+    public Follow()
+    {
+        userID = "";
+        followedUserID  = "";
+        followDate = "";
+    }
+    
+    public void setUserID(String userID){
+        this.userID = userID;
+    }
+    public void setFollowedUserID(String followedUserID)
+    {
+        this.followedUserID = followedUserID;
+    }
+    public void setFollowDate(String followDate)
+    {
+        this.followDate = followDate;
+    }
+    public String getUserID()
+    {
+        return this.userID;
+    }
+    public String getFollowedUserID()
+    {
+        return this.followedUserID;
+    }
+    public String getFollowDate()
+    {
+        return this.followDate;
+    }
 }
