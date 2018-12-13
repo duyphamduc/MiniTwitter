@@ -98,10 +98,10 @@ public class UploadServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         
         String uploadType = (String) session.getAttribute("uploadType");
-        System.out.println("uploadTYPE: " + uploadType);
         String imageURL = "";
         if(uploadType != null){
-            String public_id = uploadType + File.separator + uploadType + "_" + user.getUserID();
+            String public_id = uploadType + '/' + uploadType + "_" + user.getUserID();
+            
             Map params = ObjectUtils.asMap(
                 "public_id", public_id, 
                 "overwrite", true,

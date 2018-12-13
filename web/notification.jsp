@@ -30,11 +30,13 @@
         <div class="column is-half">
             <nav class="breadcrumb has-bullet-separator is-medium" aria-label="breadcrumbs">
                 <ul>
-                  <li><a href="#">All</a></li>
-                  <li><a href="#">Mentions</a></li>
+                  <li><a href="#">Notifications</a></li>
                 </ul>
             </nav>
             <!--View Notification-->
+            <c:if test="${empty notifications}">
+                <p>No new notification.</p>
+            </c:if>
             <c:forEach var="notification" items="${notifications}">
                 <article class="media">
                     <figure class="media-left">
