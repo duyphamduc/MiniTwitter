@@ -282,6 +282,11 @@ SET character_set_client = utf8;
  1 AS `profileURL`*/;
 SET character_set_client = @saved_cs_client;
 
+CREATE DEFINER=`root`@`localhost` FUNCTION `search_keyword`() RETURNS varchar(50) CHARSET utf8
+    NO SQL
+    DETERMINISTIC
+return @keyword;
+
 --
 -- Current Database: `twitterdb`
 --
