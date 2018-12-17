@@ -35,10 +35,10 @@ function follow(action, username){
 };
 
 $(document).ready(function(){
-    $("#hashtag").mouseover(function(){
+    $(".hashtag").mouseover(function(){
         var hashtag = $("#hashtag").text();
         hashtag = hashtag.substring(1);
-        $("#hashtag").attr("href","hashtag?action=viewTweets&hashtagText=" + hashtag);
+        $(".hashtag").attr("href","hashtag?action=viewTweets&hashtagText=" + hashtag);
     });
     var times = document.getElementsByClassName("timeAgo");
     for (var i = 0; i < times.length; i++){

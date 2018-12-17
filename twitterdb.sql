@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.23, for macos10.13 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: twitterdb
 -- ------------------------------------------------------
--- Server version	5.7.23
+-- Server version	5.7.23-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,8 +36,18 @@ CREATE TABLE `follow` (
   `followedUserID` int(11) NOT NULL,
   `followDate` datetime NOT NULL,
   PRIMARY KEY (`followID`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `follow`
+--
+
+LOCK TABLES `follow` WRITE;
+/*!40000 ALTER TABLE `follow` DISABLE KEYS */;
+INSERT INTO `follow` VALUES (53,8,7,'2018-12-13 07:32:33'),(54,7,8,'2018-12-13 07:57:57');
+/*!40000 ALTER TABLE `follow` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `hashtag`
@@ -51,8 +61,18 @@ CREATE TABLE `hashtag` (
   `hashtagText` varchar(100) NOT NULL,
   `hashtagCount` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`hashtagID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hashtag`
+--
+
+LOCK TABLES `hashtag` WRITE;
+/*!40000 ALTER TABLE `hashtag` DISABLE KEYS */;
+INSERT INTO `hashtag` VALUES (25,'hi',2);
+/*!40000 ALTER TABLE `hashtag` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `mention`
@@ -66,8 +86,35 @@ CREATE TABLE `mention` (
   `tweetID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   PRIMARY KEY (`mentionID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mention`
+--
+
+LOCK TABLES `mention` WRITE;
+/*!40000 ALTER TABLE `mention` DISABLE KEYS */;
+INSERT INTO `mention` VALUES (25,132,8),(26,133,7);
+/*!40000 ALTER TABLE `mention` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `search`
+--
+
+DROP TABLE IF EXISTS `search`;
+/*!50001 DROP VIEW IF EXISTS `search`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `search` AS SELECT 
+ 1 AS `table_name`,
+ 1 AS `username`,
+ 1 AS `fullname`,
+ 1 AS `profileURL`,
+ 1 AS `twit`,
+ 1 AS `hashtagText`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `tweet`
@@ -82,23 +129,43 @@ CREATE TABLE `tweet` (
   `twit` varchar(280) NOT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`tweetID`)
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `tweetHashtag`
+-- Dumping data for table `tweet`
 --
 
-DROP TABLE IF EXISTS `tweetHashtag`;
+LOCK TABLES `tweet` WRITE;
+/*!40000 ALTER TABLE `tweet` DISABLE KEYS */;
+INSERT INTO `tweet` VALUES (131,8,'hi all','2018-12-13 07:32:26'),(132,8,'hi <a class=\'mention\'>@quypham</a> <a href=\"hashtag\" id=\"hashtag\" class=\"hashtag\">#hi</a>','2018-12-13 07:32:56'),(133,8,'Hi <a class=\'mention\'>@duyphamduc</a> <a href=\"hashtag\" id=\"hashtag\" class=\"hashtag\">#hi</a>','2018-12-13 07:34:08');
+/*!40000 ALTER TABLE `tweet` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tweethashtag`
+--
+
+DROP TABLE IF EXISTS `tweethashtag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tweetHashtag` (
+CREATE TABLE `tweethashtag` (
   `tweetHashtagID` int(11) NOT NULL AUTO_INCREMENT,
   `tweetID` int(11) NOT NULL,
   `hashtagID` int(11) NOT NULL,
   PRIMARY KEY (`tweetHashtagID`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tweethashtag`
+--
+
+LOCK TABLES `tweethashtag` WRITE;
+/*!40000 ALTER TABLE `tweethashtag` DISABLE KEYS */;
+INSERT INTO `tweethashtag` VALUES (66,132,25),(67,133,25);
+/*!40000 ALTER TABLE `tweethashtag` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
@@ -120,8 +187,18 @@ CREATE TABLE `user` (
   `coverURL` varchar(500) DEFAULT 'https://res.cloudinary.com/minitwitter/image/upload/v1541485580/cover/default_cover.jpg',
   `lastVisit` datetime DEFAULT NULL,
   PRIMARY KEY (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (7,'Duy Pham','duyphamduc','duypham93@gmail.com','1993-12-30','$2a$10$SpHy.IkW2K4gbi/nC1zwfeu4yQkAprkgk8jC4SxCcBUweO5iQOszG',1,'dog','https://res.cloudinary.com/minitwitter/image/upload/v1544712356/profile/profile_7.jpg','https://res.cloudinary.com/minitwitter/image/upload/v1541485580/cover/default_cover.jpg','2018-12-17 13:30:48'),(8,'Quy Pham','quypham','quypham12@gmail.com','2000-09-05','$2a$10$uXAFQImdGBWaupObrFkH7.0E7C52tXg7MXth/dzCR/U4R96lsd.8G',2,'toyota','https://res.cloudinary.com/minitwitter/image/upload/v1541485112/profile/default_profile.png','https://res.cloudinary.com/minitwitter/image/upload/v1541485580/cover/default_cover.jpg','2018-12-17 13:31:37');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Temporary table structure for view `view_hashtag_tweet`
@@ -212,6 +289,24 @@ SET character_set_client = @saved_cs_client;
 USE `twitterdb`;
 
 --
+-- Final view structure for view `search`
+--
+
+/*!50001 DROP VIEW IF EXISTS `search`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `search` AS select `results`.`table_name` AS `table_name`,`results`.`username` AS `username`,`results`.`fullname` AS `fullname`,`results`.`profileURL` AS `profileURL`,`results`.`twit` AS `twit`,`results`.`hashtagText` AS `hashtagText` from ((select 'usr' AS `table_name`,`twitterdb`.`user`.`username` AS `username`,`twitterdb`.`user`.`fullname` AS `fullname`,`twitterdb`.`user`.`profileURL` AS `profileURL`,NULL AS `twit`,NULL AS `hashtagText` from `twitterdb`.`user` where (`twitterdb`.`user`.`fullname` like `search_keyword`())) union all (select 'tweet' AS `table_name`,`twitterdb`.`user`.`username` AS `username`,`twitterdb`.`user`.`fullname` AS `fullname`,`twitterdb`.`user`.`profileURL` AS `profileURL`,`twitterdb`.`tweet`.`twit` AS `twit`,NULL AS `hashtagText` from (`twitterdb`.`tweet` join `twitterdb`.`user` on((`twitterdb`.`user`.`userID` = `twitterdb`.`tweet`.`userID`))) where (`twitterdb`.`tweet`.`twit` like `search_keyword`())) union all (select 'hashtag' AS `table_name`,NULL AS `username`,NULL AS `fullname`,NULL AS `profileURL`,NULL AS `twit`,`twitterdb`.`hashtag`.`hashtagText` AS `hashtagText` from `twitterdb`.`hashtag` where (`twitterdb`.`hashtag`.`hashtagText` like `search_keyword`()))) `results` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `view_hashtag_tweet`
 --
 
@@ -292,4 +387,4 @@ USE `twitterdb`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-01 15:52:58
+-- Dump completed on 2018-12-17 13:50:40

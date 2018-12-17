@@ -20,6 +20,17 @@
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
+                        <form action="search" method="post">
+                            <input type="hidden" name="action" value="search">
+                            <div class="field has-addons">
+                                <div class="control">
+                                  <input class="input" type="text" name="search_keyword" placeholder="Search Twitter">
+                                </div>
+                                <button class="button is-info">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="navbar-item">
                         <div class="buttons">
                             <a href="/MyTwitter/membership?action=logout" class="button is-info">Logout</a>
                         </div>

@@ -3,18 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/src/java/dataaccess/TweetDB.java</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/src/java/controller/TweetServlet.java</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/src/java/controller/UploadServlet.java</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/src/java/controller/TweetUtil.java</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/web/home.jsp</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/web/parts/header.jsp</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/web/notification.jsp</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/web/parts/footer.jsp</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/src/java/business/Notification.java</file>
-            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/src/java/dataaccess/MentionDB.java</file>
+            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/web/styles/style.js</file>
+            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/src/java/controller/SearchServlet.java</file>
+            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/web/parts/main_header.jsp</file>
+            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/web/search.jsp</file>
+            <file>file:/C:/Users/Duy%20Pham/Desktop/MiniTwitter/src/java/dataaccess/SearchDB.java</file>
         </group>
     </open-files>
 </project-private>
