@@ -40,16 +40,6 @@ CREATE TABLE `follow` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `follow`
---
-
-LOCK TABLES `follow` WRITE;
-/*!40000 ALTER TABLE `follow` DISABLE KEYS */;
-INSERT INTO `follow` VALUES (53,8,7,'2018-12-13 07:32:33'),(54,7,8,'2018-12-13 07:57:57');
-/*!40000 ALTER TABLE `follow` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `hashtag`
 --
 
@@ -65,16 +55,6 @@ CREATE TABLE `hashtag` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `hashtag`
---
-
-LOCK TABLES `hashtag` WRITE;
-/*!40000 ALTER TABLE `hashtag` DISABLE KEYS */;
-INSERT INTO `hashtag` VALUES (25,'hi',2);
-/*!40000 ALTER TABLE `hashtag` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `mention`
 --
 
@@ -88,16 +68,6 @@ CREATE TABLE `mention` (
   PRIMARY KEY (`mentionID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `mention`
---
-
-LOCK TABLES `mention` WRITE;
-/*!40000 ALTER TABLE `mention` DISABLE KEYS */;
-INSERT INTO `mention` VALUES (25,132,8),(26,133,7);
-/*!40000 ALTER TABLE `mention` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Temporary table structure for view `search`
@@ -133,16 +103,6 @@ CREATE TABLE `tweet` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tweet`
---
-
-LOCK TABLES `tweet` WRITE;
-/*!40000 ALTER TABLE `tweet` DISABLE KEYS */;
-INSERT INTO `tweet` VALUES (131,8,'hi all','2018-12-13 07:32:26'),(132,8,'hi <a class=\'mention\'>@quypham</a> <a href=\"hashtag\" id=\"hashtag\" class=\"hashtag\">#hi</a>','2018-12-13 07:32:56'),(133,8,'Hi <a class=\'mention\'>@duyphamduc</a> <a href=\"hashtag\" id=\"hashtag\" class=\"hashtag\">#hi</a>','2018-12-13 07:34:08');
-/*!40000 ALTER TABLE `tweet` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tweethashtag`
 --
 
@@ -156,16 +116,6 @@ CREATE TABLE `tweethashtag` (
   PRIMARY KEY (`tweetHashtagID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tweethashtag`
---
-
-LOCK TABLES `tweethashtag` WRITE;
-/*!40000 ALTER TABLE `tweethashtag` DISABLE KEYS */;
-INSERT INTO `tweethashtag` VALUES (66,132,25),(67,133,25);
-/*!40000 ALTER TABLE `tweethashtag` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
@@ -189,16 +139,6 @@ CREATE TABLE `user` (
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (7,'Duy Pham','duyphamduc','duypham93@gmail.com','1993-12-30','$2a$10$SpHy.IkW2K4gbi/nC1zwfeu4yQkAprkgk8jC4SxCcBUweO5iQOszG',1,'dog','https://res.cloudinary.com/minitwitter/image/upload/v1544712356/profile/profile_7.jpg','https://res.cloudinary.com/minitwitter/image/upload/v1541485580/cover/default_cover.jpg','2018-12-17 13:30:48'),(8,'Quy Pham','quypham','quypham12@gmail.com','2000-09-05','$2a$10$uXAFQImdGBWaupObrFkH7.0E7C52tXg7MXth/dzCR/U4R96lsd.8G',2,'toyota','https://res.cloudinary.com/minitwitter/image/upload/v1541485112/profile/default_profile.png','https://res.cloudinary.com/minitwitter/image/upload/v1541485580/cover/default_cover.jpg','2018-12-17 13:31:37');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Temporary table structure for view `view_hashtag_tweet`
@@ -285,7 +225,7 @@ SET character_set_client = @saved_cs_client;
 CREATE DEFINER=`root`@`localhost` FUNCTION `search_keyword`() RETURNS varchar(50) CHARSET utf8
     NO SQL
     DETERMINISTIC
-return @keyword;
+return @keyword
 
 --
 -- Current Database: `twitterdb`
@@ -392,4 +332,4 @@ USE `twitterdb`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-17 13:50:40
+-- Dump completed on 2018-12-17 17:43:51

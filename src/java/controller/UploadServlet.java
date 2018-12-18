@@ -42,9 +42,9 @@ public class UploadServlet extends HttpServlet {
     public static final int MAX_FILE_SIZE = 1024 * 1024 * 40;
     public static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50;
     
-    private static final String API_KEY = "316524138981326";
-    private static final String API_SECRET = "BTqszUROATiTSOlv2LOktd4gIFc";
-    private static final String CLOUD_NAME = "minitwitter";
+    private static final String API_KEY = "...API Key here...";
+    private static final String API_SECRET = "...API secrete here...";
+    private static final String CLOUD_NAME = "...Cloud name here...";
     
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

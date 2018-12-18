@@ -26,11 +26,14 @@ public class MailUtilGmail {
                         "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
+        
+        String emailAccount = "...email account here...";
+        String emailPassword = "...email password here...";
 
         Session session = Session.getDefaultInstance(props,
         new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("minitwitter.sentmail@gmail.com","d055161209");
+                return new PasswordAuthentication(emailAccount,emailPassword);
             }
         });
 
